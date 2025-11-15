@@ -25,8 +25,9 @@ class LessonFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'description' => fake()->word(),
-            'difficulty_level' => fake()->numberBetween(1,5),
+            'id_user' => User::inRandomOrder()->value('id') ?? User::factory(),
+            'id_course' => Course::inRandomOrder()->value('id') ?? Course::factory(),
+            'progress' => fake()->numberBetween(0,100);
             'created_at' => fake()->datetime(),
             'deleted_at' => fake()->optional()->dateTime(),
             'updated_at' => fake()->datetime(),

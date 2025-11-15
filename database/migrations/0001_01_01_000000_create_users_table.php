@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone_number');
-            $table->enum('role',['admin','user'])->default('user')->nullable();;
-            $table->integer('streak')->nullable();;
+            $table->enum('role',['admin','user'])->default('user')->nullable();
+            $table->integer('streak')->nullable();
+            $table->integer('xp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->date('deleted_at');
