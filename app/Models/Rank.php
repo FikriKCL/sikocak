@@ -19,9 +19,6 @@ class Rank extends Model
     protected $fillable = [
         'name',
         'id_user',
-        'created_at',
-        'updated_at',
-        'deleted_at',
     ];
 
     

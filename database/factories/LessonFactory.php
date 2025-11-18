@@ -29,9 +29,8 @@ class LessonFactory extends Factory
             'id_user' => User::inRandomOrder()->value('id') ?? User::factory(),
             'id_course' => Course::inRandomOrder()->value('id') ?? Course::factory(),
             'progress' => fake()->numberBetween(0,100),
-            'created_at' => fake()->datetime(),
-            'deleted_at' => fake()->optional()->dateTime(),
-            'updated_at' => fake()->datetime(),
+            'created_at' => fake()->dateTime('now'),
+            'updated_at' => fake()->dateTime('now'), 
         ];
     }
 }

@@ -32,9 +32,8 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'streak' => fake()->numberBetween(1, 10), 
             'remember_token' => Str::random(10),
-            'created_at' => fake()->dateTime(),
-            'updated_at' => fake()->dateTime(),
-            'deleted_at' => fake()->dateTime(), 
+            'created_at' => fake()->dateTime('now'),
+            'updated_at' => fake()->dateTime('now'), 
         ];
     }
 
@@ -47,4 +46,5 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
 }

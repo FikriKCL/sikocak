@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('xp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            $table->date('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
         });
 

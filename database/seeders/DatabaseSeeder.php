@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\ExerciseStep;
 use App\Models\AttemptStep;
 use App\Models\Attempt;
+use App\Models\BugReport;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -32,5 +33,10 @@ class DatabaseSeeder extends Seeder
         ExerciseStep::factory(10)->create();
         AttemptStep::factory(10)->create();
         Attempt::factory(10)->create();
+        BugReport::factory(10)->create();
+
+        $this->call([
+            userSeeder::class
+        ]);
     }
 }

@@ -27,9 +27,8 @@ class RankFactory extends Factory
         return [
             'name' => fake()->name(),
             'id_user' => User::inRandomOrder()->value('id') ?? User::factory(),
-            'created_at' => fake()->datetime(),
-            'deleted_at' => fake()->optional()->dateTime(),
-            'updated_at' => fake()->datetime(),
+            'created_at' => fake()->dateTime('now'),
+            'updated_at' => fake()->dateTime('now'), 
         ];
     }
 
