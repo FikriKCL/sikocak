@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('streak')->nullable();
             $table->integer('xp')->nullable();
             $table->string('imageUri')->nullable();
-            $table->foreignId('id_rank')->constrained('ranks')->onDelete('cascade');
+            $table->foreignId('id_rank')->constrained('ranks')->onDelete('cascade')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->softDeletes();

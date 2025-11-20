@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use App\Models\Rank;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -31,6 +31,8 @@ class UserFactory extends Factory
             'phone_number' =>fake()->phoneNumber(),
             'password' => static::$password ??= Hash::make('password'),
             'streak' => fake()->numberBetween(1, 10), 
+            'xp' => fake()->numberBetween(1, 10),
+            'id_rank' => Rank::inRandomOrder()->value('id') ?? Rank::factory(),  
             'remember_token' => Str::random(10),
             'created_at' => fake()->dateTime('now'),
             'updated_at' => fake()->dateTime('now'), 

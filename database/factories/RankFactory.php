@@ -26,7 +26,7 @@ class RankFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'id_user' => User::inRandomOrder()->value('id') ?? User::factory(),
+            'imageUri' => fake()->image(),
             'created_at' => fake()->dateTime('now'),
             'updated_at' => fake()->dateTime('now'), 
         ];

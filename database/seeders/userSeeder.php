@@ -22,6 +22,7 @@ class userSeeder extends Seeder
                 'uuid' => '1fa3685b-920c-3172-a436-be115a09f272',
                 'email' => 'admin@example.com',
                 'phone_number' => '089655399710',
+                'id_rank' => 5,
                 'password' => Hash::make('admin123'),
                 'role' => 'user',
             ]
