@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'phone_number' =>fake()->phoneNumber(),
             'password' => static::$password ??= Hash::make('password'),
             'streak' => fake()->numberBetween(1, 10), 
-            'xp' => fake()->numberBetween(1, 10),
+            'xp' => fake()->numberBetween(100, 1000),
             'id_rank' => Rank::inRandomOrder()->value('id') ?? Rank::factory(),  
             'remember_token' => Str::random(10),
             'created_at' => fake()->dateTime('now'),

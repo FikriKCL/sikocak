@@ -17,5 +17,22 @@ export default {
         },
     },
 
+    
+
+    theme: {
+        extend: {
+        fontFamily: {
+            jost: ["Jost", "sans-serif"], 
+        },
+
+        boxShadow: {
+            bottom: "0 10px 0 0 rgba(0,0,0,1)",      
+            bottomSm: "0 5px 0 0 rgba(0,0,0,1)",    
+        },
+        },
+    },
+
+    
+
     plugins: [forms],
 };
