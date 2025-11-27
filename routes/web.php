@@ -20,9 +20,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/leaderboard', [LeaderboardController::class, 'index']);
    
-   
     });
 
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
 
 
 

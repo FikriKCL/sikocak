@@ -1,13 +1,16 @@
 <x-guest-layout>
+    
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
        <div class="flex flex-col justify-between md:flex-row-reverse">
             <!-- ----------- TEKS SELAMAT DATANG ----------- -->
             <div class="flex items-center justify-center md:w-1/2">
-                <div class="text-3xl font-semibold md:ml-14 text-left md:text-5xl leading-tight pb-4">
+                <div class="text-1xl font-semibold md:ml-14 text-left md:text-3xl leading-tight top-10">
                     Selamat Datang
                     <p>Jagoan!</p>
                 </div>
@@ -58,8 +61,8 @@
 
                 <!-- Tombol Masuk -->
                 <div class="flex items-center justify-center mt-3">
-                    <x-primary-button class="px-4 py-1 font-semibold text-lg tracking-tighter">
-                        {{ __('MASUK') }}
+                    <x-primary-button class="bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
+                        {{ __('Masuk') }}
                     </x-primary-button>
                 </div>
 

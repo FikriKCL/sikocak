@@ -18,16 +18,23 @@
 
     <body class="
         min-h-screen
-        bg-lime-400
+        bg-[#9DFF00]
         bg-cover bg-center bg-no-repeat
         flex items-center justify-center
         font-sans antialiased
+        overflow-hidden
     ">
+    <div>
+     <img src="images/shape1.png" class="w-0 md:w-[37rem] absolute -z-10 md:right-[60rem] md:top-[22rem]"/>
+     <img src="images/shape2.png" class="w-0 md:w-[37rem] absolute -z-10 md:right-[20rem] md:top-[26rem]"/>
+     <img src="images/shape3.png" class="w-0 md:w-[21rem] absolute -z-10 md:right-[57rem] md:bottom-[20rem]"/>
+     <img src="images/shape4.png" class="w-0 md:h-[30rem] md:w-[40rem] md:left-[50rem] md:bottom-[20rem] absolute -z-10"/>
 
         <!-- Wrapper -->
-        <div class="max-w-3/4 sm:max-w-2xl bg-white rounded-3xl shadow-xl p-10 border-2 border-black ">
+        <div class="md:w-[30rem] md:h-[22rem] sm:max-w-2xl bg-white rounded-3xl shadow-xl p-10 border-2 border-black ">
             {{ $slot }}
         </div>
+    </div>
 
     </body>
 </html>
