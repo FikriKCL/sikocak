@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.text-fit {
+    font-size: clamp(0.75rem, 2vw + 0.5rem, 3rem);
+}

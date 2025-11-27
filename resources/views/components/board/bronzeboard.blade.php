@@ -4,21 +4,25 @@
     <div class="flex items-center h-full px-6 gap-6">
 
         {{-- NUMBERING --}}
-        <div class="flex items-center w-24 h-24 shadow-bottomSm border-2 border-black bg-white rounded-full">
-            <p class="text-5xl font-jost ml-8 font-semibold select-none">{{ $position }}</p>
-        </div>
+                <div class="flex items-center justify-center w-24 h-24 
+                        shadow-bottomSm border-2 border-black 
+                        bg-white rounded-full">
+                <p class="text-5xl font-jost font-semibold select-none">
+                    {{ $position }}
+                </p>
+            </div>
 
         {{-- NAME --}}
-        <div class="ml-6 text-4xl font-medium font-jost text-white select-none">{{ $ranks->name }}</div>
+        <div class="sm:text-2xl md:ml-6 md:text-4xl font-medium font-jost text-white select-none">{{ $ranks->name }}</div>
 
         {{-- RIGHT CONTAINER --}}
-        <div class="flex items-center w-64 h-24 ml-auto shadow-lg border-2 border-black bg-[linear-gradient(to_right,#B6511B,#FF9258,#C45013,#45220F)] rounded-full px-6">
+        <div class="flex items-center sm:w-32 sm:h-16 md:w-64 md:h-24 ml-auto shadow-lg border-2 border-black bg-[linear-gradient(to_right,#B6511B,#FF9258,#C45013,#45220F)] rounded-full px-6">
 
             {{-- IMAGE --}}
-            <img src="/images/bronze.png" class="w-16 h-22 mr-4 select-none" alt="My Image">
+            <img src="/images/bronze.png" class="sm:w-4 md:w-16 md:h-22 mr-4 select-none" alt="My Image">
 
             {{-- POINT --}}
-            <div class="ml-8 text-white text-5xl font-semibold select-none">{{ $ranks->xp }}</div>
+            <div class="sm:ml-auto md:m-auto text-white sm:text-2xl md:text-5xl font-semibold select-none">{{ $ranks->xp }}</div>
         </div>
 
     </div>

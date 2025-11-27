@@ -23,10 +23,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+         $this->call([
+            userSeeder::class
+        ]);
+        
         User::factory(10)->create();
         Lesson::factory(5)->create();
         Progress::factory(20)->create(); 
-        Rank::factory(10)->create();
+        // Rank::factory(10)->create();
         Attempt::factory(10)->create();
         Course::factory(10)->create();
         Exercise::factory(10)->create();
@@ -35,8 +39,6 @@ class DatabaseSeeder extends Seeder
         Attempt::factory(10)->create();
         BugReport::factory(10)->create();
 
-        $this->call([
-            userSeeder::class
-        ]);
+       
     }
 }

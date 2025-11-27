@@ -6,15 +6,26 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
+   public function show(Request $request, $username): View
+    {
+        $users = User::where('username', $username)->firstOrFail();
+
+        Log::info("Data User:", $users->toArray());
+
+        return view('user_profile', compact('users'));
+    }
+
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, $username): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
@@ -24,7 +35,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, $username ): RedirectResponse
     {
         $request->user()->fill($request->validated());
 

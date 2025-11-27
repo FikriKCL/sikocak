@@ -14,8 +14,26 @@ class LeaderboardController extends Controller
         $ranking = User::select('id', 'name', 'id_rank', 'xp')
             // ->whereNot('role', 'admin')
             ->orderBy('xp','desc')
-            ->paginate(10);
+            ->get();
 
+        $id_rank = User::select('id_rank');
+
+        foreach ($ranking as $user) {
+            $xp = $user->xp;
+
+            if ($xp >= 2000) {
+                $user->id_rank = 5;
+            } elseif ($xp >= 1000) {
+                $user->id_rank = 4;
+            } elseif ($xp >= 500) {
+                $user->id_rank = 3;
+            } elseif ($xp >= 300) {
+                $user->id_rank = 2;
+            } else {
+                $user->id_rank = 1;
+            }
+        }
+        
         Log::info("Data Leaderboard :", $ranking->toArray());
 
         return view('leaderboard', compact('ranking'));
