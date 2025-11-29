@@ -61,9 +61,9 @@
 
                 <!-- Tombol Masuk -->
                 <div class="flex items-center justify-center mt-3">
-                    <x-primary-button class="bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
+                    <x-login-button class="md:w-auto md:h-1 bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
                         {{ __('Masuk') }}
-                    </x-primary-button>
+                    </x-login-button>
                 </div>
 
                 <!-- ----------- TOMBOL SOSIAL MINI ----------- -->
