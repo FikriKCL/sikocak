@@ -43,7 +43,7 @@
 
         <div class="flex items-center justify-center flex-col mt-4">
 
-        <x-register-button class="md:h-10">
+        <x-register-button class="md:h-6 text-base">
                 {{ __('Daftar') }}
             </x-register-button>
 
