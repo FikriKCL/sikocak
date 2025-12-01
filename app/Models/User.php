@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'uuid',
         'name',
@@ -25,6 +27,10 @@ class User extends Authenticatable
         'phone_number',
         'role',
         'streak',
+        'xp',
+        'imageUrl',
+        'id_rank',
+        'email_verified_at',
     ];
 
     /**
@@ -49,4 +55,36 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+public function rank()
+    {
+        return $this->belongsTo(Rank::class, 'id_rank');
+    }
+
+    public function progress()
+    {
+        return $this->hasMany(Progress::class, 'id_user');
+    }
+
+    public function attempts()
+    {
+        return $this->hasMany(Attempt::class, 'id_user');
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'id_user');
+    }
+
+    // Helper method untuk mendapatkan total score
+    public function getTotalScore()
+    {
+        return $this->attempts()->sum('score');
+    }
+
+    // Helper method untuk mendapatkan completed lessons
+    public function getCompletedLessonsCount()
+    {
+        return $this->progress()->where('status', 'Done')->count();
+    }
 }
+

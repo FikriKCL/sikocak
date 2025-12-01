@@ -20,5 +20,14 @@ class ExerciseStep extends Model
     {
         return $this->belongsTo(Exercise::class, 'id_exercise');
     }
+    public function exercise()
+    {
+        return $this->belongsTo(Exercise::class, 'id_exercise');
+    }
+
+    public function attemptSteps()
+    {
+        return $this->hasMany(AttemptStep::class, 'id_exercise_step');
+    }
 
 }

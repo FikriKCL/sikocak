@@ -18,6 +18,11 @@ class Progress extends Model
         'score',
     ];
 
+    protected $casts = [
+        'started_at' => 'datetime',
+        'completed_at' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');

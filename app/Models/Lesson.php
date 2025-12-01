@@ -21,4 +21,20 @@ class Lesson extends Model
         'description',
         'difficulty_level',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'id_course');
+    }
+
+    public function progress()
+    {
+        return $this->hasMany(Progress::class, 'id_lesson');
+    }
+
 }

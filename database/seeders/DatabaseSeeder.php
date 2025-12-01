@@ -13,6 +13,7 @@ use App\Models\AttemptStep;
 use App\Models\Attempt;
 use App\Models\BugReport;
 
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -36,7 +37,9 @@ class DatabaseSeeder extends Seeder
         BugReport::factory(10)->create();
 
         $this->call([
-            userSeeder::class
+            userSeeder::class,
+            LearningSeeder::class,
+            ExerciseLevelSeeder::class
         ]);
     }
 }

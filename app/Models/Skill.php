@@ -4,20 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Skill extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'skills';
 
     protected $fillable = [
-        'id_answer',
-        'option_text',
-        'is_correct',
+        'id_course',
+        'name',
+        'description',
     ];
 
-    public function answer()
+    public function course()
     {
-        return $this->belongsTo(Answer::class, 'id_answer');
+        return $this->belongsTo(Course::class, 'id_course');
+    }
+
+    public function exercises()
+    {
+        return $this->hasMany(Exercise::class, 'id_skill');
     }
 
 }
