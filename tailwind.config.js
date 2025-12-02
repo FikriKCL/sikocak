@@ -30,6 +30,14 @@ export default {
             bottomSm: "0 5px 0 0 rgba(0,0,0,1)",    
         },
         },
+
+          screens: {
+                xxs: '320px',
+                xs: '380px',
+                sm: '640px',
+                md: '768px',
+                lg: '1024px',
+            }
     },
 
     
