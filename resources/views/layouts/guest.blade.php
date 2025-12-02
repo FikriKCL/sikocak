@@ -31,7 +31,7 @@
      <img src="images/shape4.png" class="hidden md:block md:h-[50rem] md:w-[40rem] md:left-[60rem] md:bottom-[20rem] absolute -z-10"/>
 
         <!-- Wrapper -->
-        <div class="md:w-[30rem] md:h-[22rem] sm:max-w-2xl bg-white rounded-3xl shadow-xl p-10 border-2 border-black ">
+        <div class="flex shrink-0 items-center md:w-[30rem] md:h-[22rem] sm:max-w-2xl bg-white rounded-3xl shadow-xl p-10 border-2 border-black ">
             {{ $slot }}
         </div>
     </div>

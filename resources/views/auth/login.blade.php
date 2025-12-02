@@ -7,10 +7,10 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-       <div class="flex flex-col justify-between md:flex-row-reverse">
+       <div class="flex flex-col justify-between md:flex-row-reverse items-center m-auto">
             <!-- ----------- TEKS SELAMAT DATANG ----------- -->
-            <div class="flex items-center justify-center md:w-1/2">
-                <div class="text-1xl font-semibold md:ml-14 text-left md:text-3xl leading-tight top-10">
+            <div class="flex items-center justify-center md:w-1/2 pb-5">
+                <div class=" text-2xl font-semibold md:ml-12 text-left md:text-3xl leading-tight top-10 ">
                     Selamat Datang
                     <p>Jagoan!</p>
                 </div>
@@ -61,7 +61,7 @@
 
                 <!-- Tombol Masuk -->
                 <div class="flex items-center justify-center mt-3">
-                    <x-login-button class="md:w-auto md:h-1 bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
+                    <x-login-button class="w-auto h-1 uppercase bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
                         {{ __('Masuk') }}
                     </x-login-button>
                 </div>
