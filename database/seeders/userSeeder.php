@@ -38,29 +38,25 @@ class UserSeeder extends Seeder
 
         $ranks = [
             [
-                'id' => 1,
+    
                 'name' => 'Bronze',
-                'imageUri' => 'images.jpg',
+                'imageUri' => 'bronze.png',
             ],
             [
-                'id' => 2,
                 'name' => 'Silver',
-                'imageUri' => 'images.jpg',
+                'imageUri' => 'silver.png',
             ],
             [
-                'id' => 3,
                 'name' => 'Gold',
-                'imageUri' => 'images.jpg',
+                'imageUri' => 'gold.png',
             ],
             [
-                'id' => 4,
                 'name' => 'Diamond',
-                'imageUri' => 'images.jpg',
+                'imageUri' => 'diamond.png',
             ],
             [
-                'id' => 5,
                 'name' => 'Quartz',
-                'imageUri' => 'images.jpg',
+                'imageUri' => 'kuarsa.png',
             ]
         ];
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Exercise;
+use Illuminate\Support\Facades\Log;
 use App\Models\Progress;
 use App\Models\Attempt;
 
@@ -66,6 +67,18 @@ class DashboardController extends Controller
             }
         }
         
+        $headerColor= [
+            1 => '#FF9966',
+            2 => '#ADADAD',
+            3 => '#FED158',
+            4 => '#58FFF9',
+            5 => '#FF58EE'
+        ];
+        
+        $header = $headerColor[$user->id_rank] ?? '#FF9966';
+
+        Log::info("Data user logged in : ", $user->toArray());
+        
         // Hitung total score dari attempts
         $totalScore = $user->attempts()->sum('score');
         
@@ -87,6 +100,8 @@ class DashboardController extends Controller
         return view('dashboard.index', compact(
             'user',
             'course',
+            'headerColor',
+            'header',
             'lessons',
             'exercises',
             'totalScore',

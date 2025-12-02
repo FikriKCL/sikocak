@@ -8,7 +8,11 @@ class GameController extends Controller
 {
     public function index()
     {
-        // Data dummy untuk contoh
+        //  $userData = User::select('id', 'name', 'id_rank', 'xp')
+        //     // ->whereNot('role', 'admin')
+        //     ->orderBy('xp','desc')
+        //     ->get();
+
         $userData = [
             'name' => 'Cania Citta',
             'badge' => 'Perunggu',

@@ -23,33 +23,16 @@
             </div>
         </div>
 
-        @php
-            $position = 1;
+        @php 
+        $position = 1; 
         @endphp
 
-       @foreach($ranking as $user)
-            @if ($user->id_rank == 5)
+        @foreach ($ranking as $user)
             <div class="mb-6">
-                <x-board.quartzboard :ranks="$user" :position="$position" />
+                <x-board.rank-board :rankUser="$user" :position="$position"/>
             </div>
-            @elseif($user->id_rank == 4)
-            <div class="mb-6">
-                <x-board.diamondboard :ranks="$user" :position="$position" />
-            </div>
-            @elseif($user->id_rank == 3)
-            <div class="mb-6">
-                <x-board.goldboard :ranks="$user" :position="$position" />
-            </div>
-            @elseif($user->id_rank == 2)
-            <div class="mb-6">
-                <x-board.silverboard :ranks="$user" :position="$position" />
-            </div>
-            @else
-            <div class="mb-6">
-                <x-board.bronzeboard :ranks="$user" :position="$position" />
-            </div>
-                @endif 
 
             @php $position++; @endphp
         @endforeach
+
 </x-app-layout>

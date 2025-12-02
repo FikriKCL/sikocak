@@ -34,7 +34,6 @@ class LeaderboardController extends Controller
             }
         }
         
-        Log::info("Data Leaderboard :", $ranking->toArray());
 
         return view('leaderboard', compact('ranking'));
     }
