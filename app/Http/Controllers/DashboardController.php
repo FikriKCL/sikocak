@@ -98,6 +98,10 @@ class DashboardController extends Controller
         
         // Tentukan level saat ini berdasarkan completed exercises
         $currentLevel = $completedExercises + 1;
+
+        if ($currentLevel > 5) {
+            $currentLevel = "Clear!";
+        }
         
         return view('dashboard.index', compact(
             'user',

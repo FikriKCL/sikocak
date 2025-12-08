@@ -9,62 +9,77 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#F5F5F0] min-h-screen">
-    <div class="container mx-auto px-4 py-6">
+    <div class="mx-auto py-6">
         <!-- Header -->
-        <header class="flex justify-between items-center mb-8">
+        <header class="flex w-full items-center justify-between mb-8">
             <!-- Logo/Brand -->
-            
-        <x-dashboard.player-header :user="$user" :header="$header"/>
-            <!-- Badge SiKocak -->
-        <x-dashboard.sikocak-header :progressPercentage="$progressPercentage" /> 
+                <x-dashboard.player-header :user="$user" :header="$header"/>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-2 px-4 gap-8 items-start">
             <!-- Left Section - Lessons -->
-            <div class="space-y-6">
-                <!-- Profile Card -->
-                <a href = "{{route("leaderboard.index")}} ">
-                    <x-dashboard.player-card :user="$user" :header="$header"/>
-                </a>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                <!-- Lessons Panel -->
-                <div class="bg-white rounded-3xl border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                    <h2 class="text-2xl font-black mb-4 text-center border-b-4 border-black pb-3">Materi</h2>
-                    <div class="space-y-3">
-                        @forelse($lessons->take(4) as $index => $lesson)
-                        <a 
-                            href="{{ route('lesson.show', $lesson->id) }}"
-                            class="block w-full bg-[#CCFF00] hover:bg-[#B8E600] px-6 py-4 rounded-full border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-                        >
-                            <span class="text-xl font-black text-black">{{ $lesson->name }}</span>
-                        </a>
-                        @empty
-                        <p class="text-center text-gray-500">Belum ada materi tersedia</p>
-                        @endforelse
-                    </div>
-                </div>
+    <!-- ===================== -->
+    <!-- KOLOM KIRI (2 kolom) -->
+    <!-- ===================== -->
+    <div class="space-y-6 lg:col-span-2">
 
-                <!-- Trophy Score -->
-                <x-dashboard.trophy-card :totalScore="$totalScore" :header="$header"/>
-                    
-            </div>
+        <!-- Profile Card -->
+        <a href="{{ route('leaderboard.index') }}">
+            <x-dashboard.player-card :user="$user" :header="$header"/>
+        </a>
+
+        <!-- Trophy Score -->
+        <x-dashboard.trophy-card :totalScore="$totalScore" :header="$header"/>
+
+    </div>
+
+    <!-- ====================== -->
+    <!-- KOLOM KANAN: MATERI    -->
+    <!-- ====================== -->
+    <div class="bg-white rounded-3xl border-4 border-black p-6 
+                shadow-[8px_8px_0px_rgba(0,0,0,1)] flex flex-col">
+
+        <h2 class="text-2xl font-black text-center mb-4 border-b-4 border-black pb-3">
+            Materi
+        </h2>
+
+        <div class="flex flex-col space-y-4 flex-1 justify-center">
+
+            @forelse($lessons as $index => $lesson)
+            <a 
+                href="{{ route('lesson.show', $lesson->id) }}"
+                class="bg-[#CCFF00] hover:bg-[#B8E600]
+                       px-6 py-3 rounded-full border-4 border-black
+                       shadow-[4px_4px_0px_rgba(0,0,0,1)]
+                       hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]
+                       hover:translate-x-[2px] hover:translate-y-[2px]
+                       transition-all text-center"
+            >
+                <span class="text-lg font-black text-black">
+                    {{ $lesson->name ?? 'Materi-' . ($index + 1) }}
+                </span>
+            </a>
+            @empty
+            <p class="text-center text-gray-500">Belum ada materi tersedia</p>
+            @endforelse
+
+        </div>
+    </div>
+
+</div>
+
 
             <!-- Right Section - Exercises Level Path -->
             <div class="space-y-6">
                 <!-- Main Level Button -->
                 <div class="flex flex-col items-center gap-6">
-                    <!-- Mascot -->
-                    <div class="relative animate-bounce">
-                        <div class="w-20 h-24 bg-[#CCFF00] rounded-t-full border-4 border-black relative">
-                            <!-- Eye -->
-                            <div class="absolute top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-white rounded-full border-3 border-black">
-                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-black rounded-full"></div>
-                            </div>
-                            <!-- Bottom wave -->
-                            <div class="absolute bottom-0 left-0 right-0 h-4 bg-[#CCFF00] border-t-4 border-black" style="clip-path: polygon(0 50%, 25% 0, 50% 50%, 75% 0, 100% 50%, 100% 100%, 0 100%);"></div>
-                        </div>
-                    </div>
 
+                    <x-dashboard.sikocak-header :progressPercentage="$progressPercentage" />
+
+                <div class="flex flex-row items-center ml-20">
+                    
                     <!-- Play Button -->
                     @if($currentExercise)
                     <a 
@@ -91,6 +106,15 @@
                         </div>
                     </div>
                     @endif
+
+                    <!-- Mascot -->
+                    <div class="relative animate-bounce">
+                        <div class="w-20 h-24 ml-5">
+                            <img src="/images/monster.png" alt="">
+                        </div>
+                    </div>
+
+                    </div>
 
                     <!-- Level Badge -->
                     <div class="bg-[#CCFF00] px-12 py-4 rounded-full border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
