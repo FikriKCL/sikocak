@@ -97,7 +97,8 @@ class ExerciseController extends Controller
             ]);
         }
         
-        $score = 0;
+
+        $score = $user->xp;
         $totalSteps = $exercise->exerciseSteps->count();
         $correctAnswers = 0;
         $errorsDetail = [];
