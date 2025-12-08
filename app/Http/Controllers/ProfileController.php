@@ -15,7 +15,7 @@ class ProfileController extends Controller
 {
    public function show(Request $request, $username): View
     {
-        $users = User::where('username', $username)->firstOrFail();
+        $users = User::where('name', $username)->firstOrFail();
 
         Log::info("Data User:", $users->toArray());
 
