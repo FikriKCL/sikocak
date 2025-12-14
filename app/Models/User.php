@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -25,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'username',
         'password',
+        // 'last_streak_at',
         // 'phone_number',
         // 'role',
         // 'streak',
@@ -54,6 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_streak_at' => 'date',
+
         ];
     }
 public function rank()
@@ -81,6 +86,46 @@ public function rank()
     {
         return $this->attempts()->sum('score');
     }
+
+    //Ini COMMENT
+
+    public function updateRank()
+    {
+        $xp = $this->xp;
+
+        if ($xp >= 2000) $newRank = 5;
+        elseif ($xp >= 1000) $newRank = 4;
+        elseif ($xp >= 500) $newRank = 3;
+        elseif ($xp >= 300) $newRank = 2;
+        else $newRank = 1;
+
+        if ($this->id_rank !== $newRank) {
+            $this->id_rank = $newRank;
+            $this->save();
+        }
+    }
+    
+        public function streakUpdate(): bool
+        {
+            $today = Carbon::today();
+            $last = $this->last_streak_at;
+
+            if ($last && $last->equalTo($today)) {
+                return false; // tidak naik
+            }
+
+            if (!$last || !$last->equalTo($today->copy()->subDay())) {
+                $this->streak = 1;
+            } else {
+                $this->streak += 1;
+            }
+
+            $this->last_streak_at = $today;
+            $this->save();
+
+            return true;
+        }
+
 
     // Helper method untuk mendapatkan completed lessons
     public function getCompletedLessonsCount()

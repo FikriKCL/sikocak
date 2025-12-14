@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Log;
 class LeaderboardController extends Controller
 {
   public function index()
+  //INI COMMENT
     {
         $ranking = User::select('id', 'name', 'id_rank', 'xp')
-            // ->whereNot('role', 'admin')
+            ->whereNot('role', 'admin')
             ->orderBy('xp','desc')
             ->get();
 
@@ -37,7 +38,6 @@ class LeaderboardController extends Controller
 
         return view('leaderboard', compact('ranking'));
     }
-
 
     public function store(Request $request) {}
     public function show(Rank $rank) {}

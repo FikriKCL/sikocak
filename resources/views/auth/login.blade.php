@@ -1,9 +1,6 @@
 <x-guest-layout>
     
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -32,13 +29,37 @@
                 </div>
 
                 <!-- Password -->
-                <div class="mt-3">
-                    <x-text-input id="password"
-                        class="block mt-1 w-full placeholder:text-black text-sm py-1.5"
-                        type="password"
-                        name="password"
-                        required autocomplete="current-password"
-                        placeholder="Password"/>
+              <div class="mt-3 rounded-full" x-data="{ show: false }">
+                    <div class="relative">
+                        <input 
+                            :type="show ? 'text' : 'password'"
+                            id="password"
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Password"
+                            class="block mt-1 w-full rounded-full placeholder:text-black text-sm py-1.5"
+                        />
+
+                        <button type="button" @click="show = !show"
+                            class="absolute inset-y-0 right-3 flex items-center"
+                        >
+                            <svg x-show="!show" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+
+                            <svg x-show="show" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.944-9.542-7a10.05 10.05 0 012.28-3.956m3.124-2.484A9.956 9.956 0 0112 5c4.478 0 8.268 2.944 9.543 7a9.958 9.958 0 01-4.304 5.235M15 12a3 3 0 00-3-3m0 0a2.99 2.99 0 00-1.219.257M9.88 9.88L4.22 4.22m15.56 15.56L14.12 14.12" />
+                            </svg>
+                        </button>
+                    </div>
+
                     <x-input-error :messages="$errors->get('password')" class="mt-1 text-xs" />
                 </div>
 
@@ -61,7 +82,7 @@
 
                 <!-- Tombol Masuk -->
                 <div class="flex items-center justify-center mt-3">
-                    <x-login-button class="w-auto h-1 uppercase bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
+                    <x-login-button class="w-auto h-1  bg-[#9DFF00] px-4 py-1 font-semibold text-lg tracking-tighter">
                         {{ __('Masuk') }}
                     </x-login-button>
                 </div>
@@ -128,6 +149,10 @@
         
                     
     </form>
-
     </div>
+        @if (session('status'))
+            <div class="mt-4 p-3 rounded-lg bg-green-600 text-white text-center animate-pulse">
+                {{ session('status') }}
+            </div>
+        @endif
 </x-guest-layout>

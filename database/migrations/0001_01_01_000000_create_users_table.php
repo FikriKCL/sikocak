@@ -3,14 +3,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
      */
+    //INI COMMENT
     public function up(): void
     {
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -19,7 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number')->nullable();
             $table->enum('role',['admin','user'])->default('user')->nullable();
-            $table->integer('streak')->nullable();
+            $table->integer('streak')->default(0)->nullable();
+            $table->date('last_streak_at')->nullable();
             $table->integer('xp')->nullable()->default(0);
             $table->string('imageUri')->nullable();
             $table->foreignId('id_rank')->default(1)->constrained('ranks')->onDelete('cascade');

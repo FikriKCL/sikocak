@@ -171,14 +171,22 @@ class ExerciseController extends Controller
         
         $user->increment('xp', $score);
         
+        //INI COMMENT
         if ($isAllCorrect) {
-            $user->increment('streak');
-            return redirect()->route('dashboard')->with('success', "Sempurna! Anda mendapat $score XP dan menyelesaikan Level " . ($exercise->difficulty) . "!");
+            $streakIncreased = $user->streakUpdate();
+
+            return redirect()->route('dashboard')->with([
+                'popup_title' => 'Sempurna!',
+                'popup_message' => $streakIncreased
+                    ? '🔥 Streak bertambah!'
+                    : 'Latihan selesai hari ini!',
+            ]);
         } else {
             return redirect()->route('exercise.show', $exerciseId)
                 ->with('error', "Jawaban belum sempurna. Coba lagi!")
                 ->with('errors_detail', $errorsDetail)
                 ->with('user_answers', $userAnswers);
         }
+   
     }
 }

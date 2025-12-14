@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Rank;
+use Carbon\Carbon;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -14,6 +15,8 @@ class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
+
+    //INI COMMENT
     protected static ?string $password = null;
 
     /**
@@ -30,7 +33,8 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'phone_number' =>fake()->phoneNumber(),
             'password' => static::$password ??= Hash::make('password'),
-            'streak' => fake()->numberBetween(1, 10), 
+            'streak' => fake()->numberBetween(1, 10),
+            'last_streak_at' => Carbon::today(), 
             'xp' => fake()->numberBetween(100, 3000),
             'id_rank' => Rank::inRandomOrder()->value('id') ?? Rank::factory(),  
             'remember_token' => Str::random(10),

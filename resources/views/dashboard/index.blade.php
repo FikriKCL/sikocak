@@ -1,7 +1,8 @@
-@props(['progressPercentage','user'])
+@props(['progressPercentage','user', 'streak'])
 <!DOCTYPE html>
 <html lang="id">
 <head>
+          {{-- <-- INI COMMENT --> --}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -9,12 +10,34 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#F5F5F0] min-h-screen">
+        @if (session('popup_message'))
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div class="bg-white rounded-3xlxl p-6 w-80 text-center border-4 border-black">
+            <h2 class="text-xl font-black mb-2">
+                {{ session('popup_title') }}
+            </h2>
+            <p class="mb-4">
+                {{ session('popup_message') }}
+            </p>
+            <button 
+                onclick="this.closest('div').parentElement.remove()"
+                class="px-4 py-2 bg-[#CCFF00] border-2 border-black rounded"
+            >
+                OK
+            </button>
+        </div>
+    </div>
+    @endif
+
     <div class="mx-auto py-6">
         <!-- Header -->
-        <header class="flex w-full items-center justify-between mb-8">
-            <!-- Logo/Brand -->
+      <header class="w-full mb-8">
+            <div class="flex items-center justify-between gap-4">
                 <x-dashboard.player-header :user="$user" :header="$header"/>
+                <x-dashboard.streak-card :user="$user"/>
+            </div>
         </header>
+
 
         <div class="grid grid-cols-1 lg:grid-cols-2 px-4 gap-8 items-start">
             <!-- Left Section - Lessons -->
@@ -31,7 +54,7 @@
         </a>
 
         <!-- Trophy Score -->
-        <x-dashboard.trophy-card :totalScore="$totalScore" :header="$header"/>
+        <x-dashboard.trophy-card :user="$user" :header="$header"/>
 
     </div>
 

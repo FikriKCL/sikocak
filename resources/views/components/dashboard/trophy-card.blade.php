@@ -1,4 +1,4 @@
-@props(['totalScore', 'header'])
+@props(['user', 'header'])
 
 {{-- Trophy / Score Card --}}
 <div 
@@ -22,7 +22,7 @@
 
     <!-- TOTAL SCORE -->
     <span class="text-3xl font-black text-white">
-        {{ $totalScore }}
+        {{ $user->xp }}
     </span>
 
 </div>

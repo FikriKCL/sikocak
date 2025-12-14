@@ -1,5 +1,5 @@
-<x-app-layout>
-    <div class="py-4 !scroll-smooth">
+<x-app-layout class="bg-white">
+    <div class="!scroll-smooth">
 
         <div class="max-w-screen-md mx-auto sm:px-6 lg:px-8 pt-12">
             <div class="flex items-center justify-center gap-6">
@@ -27,12 +27,64 @@
         $position = 1; 
         @endphp
 
-        @foreach ($ranking as $user)
-            <div class="mb-6">
-                <x-board.rank-board :rankUser="$user" :position="$position"/>
-            </div>
+    @php
+        $myId = auth()->id();
+        $position = 1;
+        @endphp
 
+        @foreach ($ranking as $user)
+            <x-board.rank-board
+                :rankUser="$user"
+                :position="$position"
+                :isMe="$user->id === $myId"
+            />
             @php $position++; @endphp
-        @endforeach
+    @endforeach
+
+
+    @php
+        $me = $ranking->firstWhere('id', $myId);
+        @endphp
+
+        @if ($me)
+        <div
+            id="sticky-me"
+            class="
+                fixed bottom-6 left-1/2 -translate-x-1/2
+                w-full max-w-4xl
+                z-50
+                hidden
+            "
+        >
+            <x-board.rank-board
+                :rankUser="$me"
+                :position="$ranking->search(fn($u) => $u->id === $myId) + 1"
+                :isMe="true"
+            />
+        </div>
+        @endif
+        {{-- <-- INI COMMENT --> --}}
+
+<script>
+    document.addEventListener('scroll', () => {
+        const myRow = document.querySelector('[data-me="true"]')
+        const sticky = document.getElementById('sticky-me')
+
+        if (!myRow || !sticky) return
+
+        const rect = myRow.getBoundingClientRect()
+
+        // kalau rank kamu KELUAR layar
+        if (rect.bottom < 0 || rect.top > window.innerHeight) {
+            sticky.classList.remove('hidden')
+        } else {
+            sticky.classList.add('hidden')
+        }
+    })
+    </script>
 
 </x-app-layout>
+
+
+
+
