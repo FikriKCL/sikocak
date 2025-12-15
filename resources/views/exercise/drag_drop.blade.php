@@ -177,7 +177,7 @@ form.addEventListener('submit', async e=>{
         }
     }catch(err){
         console.error(err);
-        setTimeout(()=>form.submit(), 1000);
+        setTimeout(()=>form.submit(), 500);
     }
 });
 });
