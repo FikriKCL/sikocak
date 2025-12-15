@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         BugReport::factory(10)->create();
 
         $this->call([
-            LearningSeeder::class,
+            // LearningSeeder::class,
             ExerciseLevelSeeder::class
         ]);
     }
