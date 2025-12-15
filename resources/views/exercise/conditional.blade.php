@@ -136,6 +136,11 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
+    const movementDuration = 650;   
+    const crashDuration = 600;      
+    const extraDelay = 800;         
+
+
     const cars = {
         red: document.getElementById('red-car'),
         yellow: document.getElementById('yellow-car'),
@@ -226,21 +231,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const movementDuration = 650;
-        setTimeout(() => {
-            // Trigger crash based on action
+       setTimeout(() => {
+    // 1️⃣ Crash happens AFTER movement
             if (action === 'back') {
                 crash([cars.red, cars.yellow]);
                 showCrashEffectOn(cars.yellow, 2);
             }
+
             if (action === 'go') {
                 crash([cars.red, ...cars.violet, ...cars.blue]);
                 showCrashEffectOn(cars.violet[1], 2);
             }
 
-            // Submit the form **after animation**
-            form.submit();
+            // 2️⃣ Submit AFTER crash + extra delay
+            setTimeout(() => {
+                form.submit();
+            }, crashDuration + extraDelay);
+
         }, movementDuration);
-    });
+            });
 });
 
 
