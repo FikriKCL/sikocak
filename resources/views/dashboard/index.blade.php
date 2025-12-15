@@ -182,10 +182,6 @@
                         </a>
                         @endif
 
-                        <!-- Level Number -->
-                        <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-gray-600">
-                            {{ $index + 1 }}
-                        </div>
                     </div>
                     @empty
                     <p class="text-center text-gray-500">Belum ada exercise tersedia</p>
