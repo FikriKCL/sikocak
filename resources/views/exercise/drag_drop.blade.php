@@ -177,7 +177,6 @@ form.addEventListener('submit', async e=>{
         }
     }catch(err){
         console.error(err);
-        showToast('Terjadi error saat submit! Form dikirim normal...', 'error', 4000);
         setTimeout(()=>form.submit(), 1000);
     }
 });
