@@ -1,122 +1,187 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Level {{ $exerciseIndex + 1 }} - Coding Maze</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        .cell { width: 64px; height: 64px; }
-        .block { cursor: grab; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Level {{ $exerciseIndex + 1 }} - Coding Maze</title>
+@vite(['resources/css/app.css','resources/js/app.js'])
+<style>
+#toast {
+    position: fixed; top: 1rem; right: 1rem;
+    min-width: 250px; padding: 1rem 1.5rem;
+    border-radius: 0.75rem; font-weight: bold;
+    color: white; display: none; z-index: 9999;
+}
+#toast.success { background-color: #4BB543; }
+#toast.error { background-color: #FF3333; }
+</style>
 </head>
-
 <body class="bg-[#F5F5F0] min-h-screen">
+<div id="toast"></div>
+
 <div class="container mx-auto px-4 py-6">
 
-    {{-- HEADER --}}
-    <header class="flex justify-between items-center mb-8">
-        <a href="{{ route('dashboard') }}" class="bg-white px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0]">
-            <span class="text-xl font-black">← Kembali</span>
-        </a>
+<header class="flex justify-between items-center mb-8">
+    <a href="{{ route('dashboard') }}" class="bg-white px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0]">
+        <span class="text-xl font-black">← Kembali</span>
+    </a>
+    <div class="bg-[#CCFF00] px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0]">
+        <h1 class="text-2xl font-black">Level {{ $exerciseIndex + 1 }}</h1>
+    </div>
+    <div class="bg-[#FF9966] px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0]">
+        <span class="text-xl font-black">{{ $user->xp }} XP</span>
+    </div>
+</header>
 
-        <div class="bg-[#CCFF00] px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0]">
-            <h1 class="text-2xl font-black">Level {{ $exerciseIndex + 1 }}</h1>
+<form id="mazeForm" method="POST" action="{{ route('exercise.submit',$exercise->id) }}">
+    @csrf
+    <input type="hidden" name="code_blocks" id="code_blocks">
+    <input type="hidden" name="is_finished" id="is_finished">
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- MAP -->
+        <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
+            <h2 class="text-xl font-black text-center mb-4">{{ $exercise->question_text }}</h2>
+            <div id="map" class="relative mx-auto w-[320px] h-[192px] border-4 border-black rounded-xl overflow-hidden">
+                <img src="{{ asset('images/map2dd.png') }}" class="absolute inset-0 w-full h-full object-cover" alt="Map">
+                <img id="icak" src="{{ asset('images/monster.png') }}" class="absolute w-10 h-10 transition-transform duration-500">
+            </div>
+            <p class="text-center font-bold mt-4">Susun kode agar Icak sampai tujuan</p>
         </div>
 
-        <div class="bg-[#FF9966] px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0]">
-            <span class="text-xl font-black">{{ $user->xp }} XP</span>
-        </div>
-    </header>
-
-    {{-- FORM --}}
-    <form id="mazeForm" action="{{ route('exercise.submit', $exercise->id) }}" method="POST">
-        @csrf
-        <input type="hidden" name="code_blocks" id="code_blocks">
-
-        <div class="grid md:grid-cols-2 gap-6">
-
-            {{-- MAZE --}}
-            <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
-                <h2 class="text-2xl font-black text-center mb-4">
-                    {{ $exercise->question_text }}
-                </h2>
-
-                <div class="flex justify-center gap-2 mb-6" id="maze">
-                    @for($i=0; $i<5; $i++)
-                        <div class="cell bg-gray-100 border-2 border-black flex items-center justify-center" data-index="{{ $i }}">
-                            @if($i === 0)
-                                <img id="icak" src="{{ asset('images/monster.png') }}" class="w-10 h-10">
-                            @elseif($i === 2)
-                                <img src="{{ asset('images/silver.png') }}" class="w-8 h-8">
-                            @endif
-                        </div>
-                    @endfor
-                </div>
-
-                <p class="text-center font-bold">Susun kode agar Icak sampai ke bendera</p>
+        <!-- BLOCK CODING -->
+        <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
+            <h3 class="text-xl font-black mb-4">Blok Kode</h3>
+            <div id="toolbox" class="space-y-2 mb-4">
+                @foreach($exercise->options as $cmd)
+                <div draggable="true" data-cmd="{{ $cmd['code'] }}" 
+                     class="block bg-yellow-200 px-4 py-2 rounded-xl border-2 border-black cursor-grab">{{ $cmd['label'] }}</div>
+                @endforeach
             </div>
 
-            {{-- BLOCK CODING --}}
-            <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
-                <h3 class="text-xl font-black mb-4">Blok Kode Python</h3>
+            <h4 class="font-black mb-2">Program Kamu</h4>
+            <div id="program" class="min-h-[120px] border-2 border-dashed border-black p-3 rounded-xl bg-gray-50"></div>
 
-                <div class="space-y-2 mb-4" id="toolbox">
-                    @foreach(['move_forward()', 'turn_left()', 'turn_right()'] as $cmd)
-                        <div draggable="true"
-                             data-cmd="{{ $cmd }}"
-                             class="block bg-yellow-200 px-4 py-2 rounded-xl border-2 border-black">
-                             {{ $cmd }}
-                        </div>
-                    @endforeach
-                </div>
-
-                <h4 class="font-black mb-2">Program Kamu</h4>
-                <div id="program"
-                     class="min-h-[120px] border-2 border-dashed border-black p-3 rounded-xl bg-gray-50">
-                </div>
-
-                <button type="submit"
-                        class="mt-6 w-full bg-[#CCFF00] px-6 py-4 rounded-full font-black border-4 border-black">
-                    Jalankan & Kirim
-                </button>
-            </div>
-
+            <button type="submit" class="mt-6 w-full bg-[#CCFF00] px-6 py-4 rounded-full font-black border-4 border-black">Jalankan & Kirim</button>
         </div>
-    </form>
+    </div>
+</form>
 </div>
 
-{{-- SCRIPT --}}
 <script>
-    const program = document.getElementById('program');
-    const hiddenInput = document.getElementById('code_blocks');
+document.addEventListener('DOMContentLoaded', ()=>{
+const toast = document.getElementById('toast');
+function showToast(msg, type='success', duration=2500){
+    toast.textContent = msg;
+    toast.className = type;
+    toast.style.display = 'block';
+    setTimeout(()=>toast.style.display='none', duration);
+}
 
-    document.querySelectorAll('.block').forEach(block => {
-        block.addEventListener('dragstart', e => {
-            e.dataTransfer.setData('text/plain', block.dataset.cmd);
+const form = document.getElementById('mazeForm');
+const hidden = document.getElementById('code_blocks');
+const finishedInput = document.getElementById('is_finished');
+const program = document.getElementById('program');
+let player = {x:0,y:0,dir:'right'};
+let hasFinished = false;
+const TILE = 64;
+const MAP = [
+  [0,0,1,0,2],
+  [1,0,1,0,1],
+  [0,0,0,0,0],
+];
+const icak = document.getElementById('icak');
+
+function render(){ icak.style.transform=`translate(${player.x*TILE}px, ${player.y*TILE}px)`; }
+function nextPos(){ 
+    let nx=player.x, ny=player.y;
+    if(player.dir==='right') nx++; if(player.dir==='left') nx--;
+    if(player.dir==='up') ny--; if(player.dir==='down') ny++;
+    return {nx, ny};
+}
+function moveForward(){
+    const {nx, ny} = nextPos();
+    if(ny<0||ny>=MAP.length||nx<0||nx>=MAP[0].length){ showToast('🚫 Keluar map', 'error'); return false; }
+    if(MAP[ny][nx]===1){ showToast('🧱 Ada rintangan', 'error'); return false; }
+    player.x=nx; player.y=ny; render();
+    if(MAP[ny][nx]===2) hasFinished=true;
+    return true;
+}
+function turnLeft(){ const d=['up','left','down','right']; player.dir=d[(d.indexOf(player.dir)+1)%4]; }
+function turnRight(){ const d=['up','right','down','left']; player.dir=d[(d.indexOf(player.dir)+1)%4]; }
+
+document.getElementById('toolbox').addEventListener('dragstart', e=>{
+    if(e.target.dataset.cmd){
+        e.dataTransfer.setData('text/plain', e.target.dataset.cmd);
+    }
+});
+
+program.addEventListener('dragover', e=>e.preventDefault());
+program.addEventListener('drop', e=>{
+    e.preventDefault();
+    const cmd = e.dataTransfer.getData('text/plain');
+    if(!cmd) return;
+    const el = document.createElement('div');
+    el.dataset.cmd = cmd;
+    el.className = 'mb-2 bg-white px-3 py-2 rounded border-2 border-black flex justify-between';
+    el.innerHTML = `<span>${cmd}</span><button type="button" onclick="this.parentElement.remove()">×</button>`;
+    program.appendChild(el);
+});
+
+async function runProgram(cmds){
+    player={x:0,y:0,dir:'right'};
+    hasFinished=false;
+    render();
+    for(const c of cmds){
+        if(c==='move_forward()') moveForward();
+        if(c==='turn_left()') turnLeft();
+        if(c==='turn_right()') turnRight();
+        await new Promise(r=>setTimeout(r,300));
+    }
+}
+
+form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const seq = [...program.children].map(b=>b.dataset.cmd);
+    hidden.value = JSON.stringify(seq);
+    finishedInput.value = hasFinished ? 1 : 0;
+
+    await runProgram(seq);
+
+    if(!hasFinished){ showToast('⚠️ Icak belum sampai tujuan!', 'error'); return; }
+
+    const formData = new FormData(form);
+    try {
+        const res = await fetch(form.action,{
+            method:'POST',
+            body: formData,
+            headers:{
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept':'application/json'
+            }
         });
-    });
+        const data = await res.json();
 
-    program.addEventListener('dragover', e => e.preventDefault());
-
-    program.addEventListener('drop', e => {
-        e.preventDefault();
-        const cmd = e.dataTransfer.getData('text/plain');
-        const el = document.createElement('div');
-
-        el.className = 'mb-2 bg-white px-3 py-2 rounded border-2 border-black flex justify-between';
-        el.dataset.cmd = cmd;
-        el.innerHTML = `<span>${cmd}</span><button onclick="this.parentElement.remove()">×</button>`;
-        program.appendChild(el);
-    });
-
-    document.getElementById('mazeForm').addEventListener('submit', () => {
-        const sequence = [...program.children].map(b => b.dataset.cmd);
-        hiddenInput.value = sequence.join(',');
-    });
+        if(data.success){
+            showToast(data.popup_message || 'Level selesai!', 'success');
+            setTimeout(()=>{ if(data.next_url) window.location.href = data.next_url; }, 1500);
+        } else {
+            let errMsg = data.error_message || 'Jawaban belum sempurna. Coba lagi!';
+            if(data.errors_detail){
+                const wrongSteps = Object.keys(data.errors_detail).map(id => `Step ${id}`);
+                errMsg += "\nLangkah yang salah: " + wrongSteps.join(', ');
+            }
+            showToast(errMsg, 'error', 4000);
+        }
+    }catch(err){
+        console.error(err);
+        showToast('Terjadi error saat submit! Form dikirim normal...', 'error', 4000);
+        setTimeout(()=>form.submit(), 1000);
+    }
+});
+});
 </script>
-
 </body>
 </html>

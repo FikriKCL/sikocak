@@ -114,15 +114,29 @@ class ExerciseLevelSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        DB::table('exercise_steps')->insert([
-            'id_exercise' => $exercise4,
-            'step_number' => 1,
-            'content' => 'Susun kode yang benar untuk mencapai bendera',
-            'answer' => 'move_forward(),move_forward()',
-            'step_options' => json_encode(['grid_size' => 3, 'start' => 0, 'end' => 2]),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+DB::table('exercise_steps')->insert([
+    'id_exercise' => $exercise4,
+    'step_number' => 1,
+    'content' => 'Susun kode yang benar untuk mencapai bendera',
+    'answer' => json_encode([
+        'move_forward()',
+        'turn_right()',
+        'move_forward()',
+        'move_forward()',
+        'turn_left()',
+        'move_forward()',
+        'move_forward()',
+        'turn_left()',
+        'move_forward()',
+        'move_forward()',
+        'turn_right()',
+        'move_forward()',
+    ]),
+    'step_options' => json_encode(['grid_size' => 3, 'start' => 0, 'end' => 2]),
+    'created_at' => now(),
+    'updated_at' => now(),
+]);
+
 
         // Level 5: Code Editor
         $exercise5 = DB::table('exercises')->insertGetId([
