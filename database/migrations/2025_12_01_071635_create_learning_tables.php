@@ -11,13 +11,13 @@ return new class extends Migration
         // Tabel Users (jika belum ada, Laravel sudah punya default)
         
         // Tabel Materials
-        Schema::create('materials', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('order')->default(0);
-            $table->timestamps();
-        });
+        // Schema::create('materials', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        //     $table->text('description')->nullable();
+        //     $table->integer('order')->default(0);
+        //     $table->timestamps();
+        // });
 
         // Tabel Levels
         Schema::create('levels', function (Blueprint $table) {
@@ -40,13 +40,13 @@ return new class extends Migration
         });
 
         // Tabel Completed Materials
-        Schema::create('completed_materials', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('material_id')->constrained()->onDelete('cascade');
-            $table->timestamp('completed_at');
-            $table->timestamps();
-        });
+        // Schema::create('completed_materials', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        //     $table->foreignId('material_id')->constrained()->onDelete('cascade');
+        //     $table->timestamp('completed_at');
+        //     $table->timestamps();
+        // });
     }
 
     public function down(): void

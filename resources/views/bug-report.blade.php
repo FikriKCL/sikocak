@@ -16,7 +16,7 @@
     </head>
 
     <body class="min-h-screen bg-[#9DFF00] bg-cover bg-center bg-no-repeat flex items-center justify-center flex-col font-sans antialiased">
-        <div class="max-w-screen-md mx-auto pt-4 mb-12">
+        <div class="max-w-screen-md mx-auto mb-12">
             <div class="flex items-center justify-center gap-6">
     
                 <div class="w-12 h-12 bg-[#9DFF00] rounded-full border-2 border-black shadow-bottomSm">
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="flex items-center justify-center flex-col mt-4">
-                    <x-register-button class="h-6 text-base uppercase">
+                    <x-register-button class="h-6 text-base ">
                         {{ __('KIRIM ADUAN') }}
                     </x-register-button>
                 </div>
