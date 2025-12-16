@@ -1,9 +1,16 @@
 @props(['user'])
-<div class="min-h-screen w-full 
-            bg-[linear-gradient(to_left,#B6511B,#FF9258,#C45013,#45220F)] 
-            flex flex-col items-center p-6 
-            overflow-hidden relative">
 
+<style>
+.bronze-gradient{
+    background: linear-gradient(to left, #b6511b, #ff9258, #C45013, #45220f);
+
+}
+
+</style>
+<div class="min-h-screen w-full
+            bronze-gradient
+            flex flex-col items-center p-6
+            overflow-hidden relative">
     @include('profile.partials.header')
 
     <!-- LEFT DECORATION -->

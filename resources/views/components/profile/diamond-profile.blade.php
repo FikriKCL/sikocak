@@ -1,4 +1,10 @@
 @props(['user'])
+<style>
+.bronze-gradient{
+    background: linear-gradient(to right,#206179,#3BB3DF,#87DFFF);
+
+}
+</style>
 
 <div class="min-h-screen w-full
             bg-[linear-gradient(to_right,#206179,#3BB3DF,#87DFFF)] 

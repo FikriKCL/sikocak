@@ -75,7 +75,7 @@ class ExerciseLevelSeeder extends Seeder
         // Level 3: Conditional Logic
         $exercise3 = DB::table('exercises')->insertGetId([
             'id_skill' => $skillId,
-            'question_text' => 'Mobil merah akan kearah depan, tetapi lampu merah sedang berwarna merah, apa yang perlu dilakukan mobil merah?',
+            'question_text' => 'Mobil merah akan kearah depan, tetapi lampu lalulintas sedang berwarna merah, apa yang perlu dilakukan mobil merah?',
             'type' => 'Multiple Choice',
             'level_type' => 'conditional',
             'difficulty' => 3,
