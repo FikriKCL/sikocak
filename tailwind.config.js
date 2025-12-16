@@ -13,7 +13,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        jost: ['Jost', 'sans-serif'],
+        sans: ['Jost', 'ui-sans-serif','system-ui'],
       },
 
       boxShadow: {
