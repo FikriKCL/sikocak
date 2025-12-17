@@ -10,11 +10,12 @@ export default {
     './storage/framework/views/*.php',
   ],
 
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Jost', 'ui-sans-serif','system-ui'],
-      },
+    theme: {
+        extend: {
+        fontFamily: {
+            jost: ["Jost", "sans-serif"], 
+             sans: ['Jost', 'ui-sans-serif','system-ui'],
+        },
 
       boxShadow: {
         bottom: '0 10px 0 0 rgba(0,0,0,1)',

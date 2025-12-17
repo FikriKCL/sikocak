@@ -1,8 +1,4 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
-
+<x-register-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -10,16 +6,32 @@
         @csrf
 
         <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+        <div class="mb-4 text-black">
+            <x-input-label for="email" :value="__('Email')" class="text-black"/>
+            <x-text-input 
+                id="email" 
+                class="block mt-1 w-full" 
+                type="email" 
+                name="email" 
+                :value="old('email')" 
+                required 
+                autofocus 
+                placeholder="Masukkan email"
+            />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+        <!-- Button dan Text Instruksi -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-4">
+            <!-- Button -->
+            <x-primary-button class="px-6 py-2 text-base w-full h-10 md:w-auto">
+                {{ __('Kirim') }}
             </x-primary-button>
+
+            <!-- Text -->
+            <div class="hidden md:flex text-sm text-black md:text-left">
+                {{ __('Lupa Password? Silahkan masukkan email untuk mengganti password!') }}
+            </div>
         </div>
     </form>
-</x-guest-layout>
+</x-register-layout>

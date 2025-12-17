@@ -63,8 +63,8 @@
                 <div class="relative">
                     <input 
                         :type="show ? 'text' : 'password'"
-                        id="password"
-                        name="password"
+                        id="password_confirmation"
+                        name="password_confirmation"
                         required
                         autocomplete="current-password"
                         placeholder="Ulangi Password"
@@ -107,10 +107,9 @@
         </div>
     </form>
 
-        <div class="md:flex-col items-center justify-center md:w-1/2 pb-5">
-                <div class=" text-2xl font-semibold md:ml-12 text-left md:text-3xl leading-tight top-10 ">
-                    Selamat Datang
-                    <p>Jagoan!</p>
+        <div class="flex items-center justify-center md:w-1/2 pb-5">
+                <div class="hidden text-2xl font-semibold md:block  md:ml-12 text-left md:text-3xl leading-tight top-10 ">
+                    Selamat Datang Jagoan!
                 </div>
             </div>
 </x-register-layout>
