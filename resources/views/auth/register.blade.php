@@ -108,9 +108,8 @@
     </form>
 
         <div class="flex items-center justify-center md:w-1/2 pb-5">
-                <div class=" text-2xl font-semibold md:ml-12 text-left md:text-3xl leading-tight top-10 ">
-                    Selamat Datang
-                    <p>Jagoan!</p>
+                <div class="hidden text-2xl font-semibold md:block  md:ml-12 text-left md:text-3xl leading-tight top-10 ">
+                    Selamat Datang Jagoan!
                 </div>
             </div>
 </x-register-layout>
