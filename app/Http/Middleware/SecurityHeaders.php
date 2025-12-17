@@ -18,6 +18,6 @@ class SecurityHeaders
             ->header(
                 'Content-Security-Policy',
                 "default-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self'; script-src 'self'; font-src 'self' data:;"
-            )
+            );
     }
 }

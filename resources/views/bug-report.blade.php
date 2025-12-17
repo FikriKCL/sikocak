@@ -67,7 +67,7 @@
 
                 <div class="flex items-center justify-center flex-col mt-4">
                     <x-register-button class="h-6 text-base ">
-                        {{ __('KIRIM ADUAN') }}
+                        {{ __('Kirim Aduan') }}
                     </x-register-button>
                 </div>
                 @if(session('success'))
