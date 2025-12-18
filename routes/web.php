@@ -13,7 +13,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth', 'verified')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/{username}', [ProfileController::class,'show'])->name('profile.show');
     Route::patch('/profile/patch', [ProfileController::class, 'update'])->name('profile.update');

@@ -3,9 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Auth\Notifications\VerifyEmail;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -135,18 +132,5 @@ public function rank()
     {
         return $this->progress()->where('status', 'Done')->count();
     }
-
-    public function sendEmailVerificationNotification()
-    {
-        
-            $notification = new VerifyEmail();
-
-            if ($notification instanceof ShouldQueue === false) {
-            
-                $notification->afterCommit();
-            }
-
-            $this->notify($notification);
-            }
 }
 

@@ -46,10 +46,10 @@ class RegisteredUserController extends Controller
         'id_rank' => 1
     ]);
 
-    event(new Registered($user));
+    // event(new Registered($user));
 
-    Auth::login($user);
+    // Auth::login($user);
 
-    return redirect(route('verification.notice', absolute: false));
+    return redirect(route('login', absolute: false));
 }
 }
