@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'xp' => 2000,
                 'id_rank' => 5,
                 'streak' => 10,
-                'last_streak_at' => Carbon::today(),
+                'last_streak_at' => Carbon::now()->subDays(2),
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',

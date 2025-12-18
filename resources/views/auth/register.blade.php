@@ -3,7 +3,7 @@
         @csrf
 
         <div class="mt-6">
-            <x-text-input id="name" class="block w-full" type="text" name="name" :value="old('name')" placeholder="Nama" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block w-full" type="text" name="name" :value="old('name')" placeholder="Nama" maxlength="20" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="w-auto"/>
         </div>
 
