@@ -108,8 +108,8 @@ class ExerciseLevelSeeder extends Seeder
             'difficulty' => 4,
             'options' => json_encode([
                 ['id' => 1, 'code' => 'move_forward()', 'label' => 'Maju'],
-                ['id' => 2, 'code' => 'turn_left()', 'label' => 'Belok Kiri'],
-                ['id' => 3, 'code' => 'turn_right()', 'label' => 'Belok Kanan'],
+                ['id' => 2, 'code' => 'turn_left()', 'label' => 'Hadap Kiri'],
+                ['id' => 3, 'code' => 'turn_right()', 'label' => 'Hadap Kanan'],
             ]),
             'created_at' => now(),
             'updated_at' => now(),

@@ -8,7 +8,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </div>
-                <a href="{{ route('profile.show', $user->username)}}" class="text-2xl font-black text-white">{{$user->username}}</a>
+                <a href="{{ route('profile.show', $user->name)}}" class="text-2xl font-black text-white">{{$user->username}}</a>
             </div>
         </div>
         </header>
