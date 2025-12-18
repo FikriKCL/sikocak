@@ -31,13 +31,11 @@ class RegisteredUserController extends Controller
 {
     $request->validate([
         'name' => ['required', 'string', 'max:255'],
-        // 1. Gabungkan logika ke dalam satu alur yang efisien
+
         'email' => [
             'required', 'string', 'lowercase', 'email', 'max:255',
-            'unique:users,email', // Cukup gunakan ini untuk validasi dasar
+            'unique:users,email', 
             function ($attribute, $value, $fail) {
-                // Hanya jalankan ini jika pengecekan 'unique' di atas lolos (jarang terjadi bentrok)
-                // Atau jika Anda ingin custom logic:
                 $user = User::where('email', $value)->select('id', 'email_verified_at')->first();
                 if ($user && $user->hasVerifiedEmail()) {
                     $fail('Email already taken.');

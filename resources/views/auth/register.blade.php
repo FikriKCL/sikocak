@@ -5,13 +5,13 @@
         <!-- Name -->
         <div class="mt-6">
             <!-- <x-input-label for="name" :value="__('Name')" /> -->
-            <x-text-input id="name" class="block w-full" type="text" name="name" :value="old('name')" placeholder="Nama" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block w-full" type="text" name="name" :value="old('name')" placeholder="Nama" required autofocus autocomplete="off" />
             <x-input-error :messages="$errors->get('name')"  class="w-auto"/>
         </div>
 
         <div class="mt-6">
             <!-- <x-input-label for="name" :value="__('Username')" /> -->
-           <x-text-input id="username" class="block w-full" type="text" name="username" :value="old('username')" placeholder="Username"  required autofocus autocomplete="username" pattern="^[a-z0-9]+$" onkeydown="return event.key !== ' '" oninput="this.value = this.value.toLowerCase().replace(/\s+/g, '')" title="Usernmame harus lowercase dan tanpa spasi."/>
+           <x-text-input id="username" class="block w-full" type="text" name="username" :value="old('username')" placeholder="Username"  required autofocus autocomplete="off" pattern="^[a-z0-9]+$" onkeydown="return event.key !== ' '" oninput="this.value = this.value.toLowerCase().replace(/\s+/g, '')" title="Usernmame harus lowercase dan tanpa spasi."/>
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
@@ -19,7 +19,7 @@
         <!-- Email Address -->
         <div class="mt-4">
             <!-- <x-input-label for="email" :value="__('Email')" /> -->
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required autocomplete="off" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
       {{-- <-- INI COMMENT --> --}}
@@ -31,7 +31,7 @@
                         id="password"
                         name="password"
                         required
-                        autocomplete="current-password"
+                        autocomplete="off"
                         placeholder="Password"
                         class="block mt-1 w-full rounded-full placeholder:text-black text-sm py-1.5"
                     />
@@ -66,7 +66,7 @@
                         id="password_confirmation"
                         name="password_confirmation"
                         required
-                        autocomplete="current-password"
+                        autocomplete="off"
                         placeholder="Ulangi Password"
                         class="block mt-1 w-full rounded-full border-black placeholder:text-black text-sm py-1.5"
                     />
