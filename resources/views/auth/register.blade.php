@@ -78,7 +78,7 @@
     </form>
 
         <div class="flex items-center justify-center md:w-1/2 pb-5">
-                <div class="sm:hidden text-2xl font-semibold md:ml-12 text-left md:text-3xl leading-tight top-10 ">
+                <div class="hidden md:block text-2xl font-semibold md:ml-12 text-left md:text-3xl leading-tight top-10 ">
                     Selamat Datang Jagoan!
                 </div>
             </div>
