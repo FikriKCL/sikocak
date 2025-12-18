@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-class User extends Authenticatable 
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -135,11 +135,15 @@ public function rank()
 
     public function sendEmailVerificationNotification()
     {
-        // Mengirim notifikasi verifikasi email ke antrean (Queue)
-        $notification = new VerifyEmail();
-        $notification->afterCommit(); // Hanya kirim jika database sukses simpan data
         
-        $this->notify($notification->delay(now()->addSeconds(2))); 
+        $notification = new class extends VerifyEmail implements \Illuminate\Contracts\Queue\ShouldQueue 
+        {
+            use \Illuminate\Bus\Queueable;
+        };
+
+        $notification->afterCommit();
+
+        $this->notify($notification);
     }
 }
 
