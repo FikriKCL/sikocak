@@ -30,21 +30,25 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
 {
     $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => [
-            'required', 'string', 'lowercase', 'email', 'max:255', 
-            function ($attribute, $value, $fail) {
-                $user = User::where('email', $value)->select('id', 'email_verified_at')->first();
-                if ($user && $user->hasVerifiedEmail()) {
-                    $fail('Email already taken.');
-                }
-            },
-        ],
-        'username' => ['required', 'string', 'lowercase', 'alpha-dash', 'unique:users,username'],
-        'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    ]);
-
-    // 2. Gunakan database transaction jika aplikasi semakin kompleks (opsional tapi baik)
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required', 'string', 'lowercase', 'email', 'max:255', 
+                function ($attribute, $value, $fail) {
+                    $user = User::where('email', $value)->select('id', 'email_verified_at')->first();
+                    
+                    if ($user) {
+                        if ($user->hasVerifiedEmail()) {
+                            $fail('Email sudah terdaftar dan diverifikasi. Silakan login.');
+                        } else {
+                            $fail('Email sudah terdaftar tetapi belum diverifikasi. Silakan cek inbox Anda atau kirim ulang link verifikasi.');
+                        }
+                    }
+                },
+            ],
+            'username' => ['required', 'string', 'lowercase', 'alpha-dash', 'unique:users,username'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+        
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
