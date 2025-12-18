@@ -27,7 +27,7 @@
                     autocomplete="new-password"
                     placeholder="Password"
                     minlength="8"
-                    class="block mt-1 w-full rounded-full placeholder:text-black text-sm py-1.5"
+                    class="block mt-1 w-full rounded-full placeholder:text-gray-600 text-sm py-1.5"
                 />
                 <button type="button" @click="show = !show" class="absolute inset-y-0 right-3 flex items-center">
                     <svg x-show="!show" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,7 +51,7 @@
                     required
                     autocomplete="new-password"
                     placeholder="Konfirmasi Password"
-                    class="block mt-1 w-full rounded-full border-black placeholder:text-black text-sm py-1.5"
+                    class="block mt-1 w-full rounded-full border-black placeholder:text-gray-600 text-sm py-1.5"
                 />
                 <button type="button" @click="show = !show" class="absolute inset-y-0 right-3 flex items-center">
                      <svg x-show="!show" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

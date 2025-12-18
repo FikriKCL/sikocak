@@ -38,7 +38,7 @@
                             required
                             autocomplete="current-password"
                             placeholder="Password"
-                            class="block mt-1 w-full rounded-full placeholder:text-black text-sm py-1.5"
+                            class="block mt-1 w-full rounded-full placeholder:text-gray-600 text-sm py-1.5"
                         />
 
                         <button type="button" @click="show = !show"
