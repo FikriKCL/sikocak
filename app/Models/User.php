@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable 
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -131,6 +131,15 @@ public function rank()
     public function getCompletedLessonsCount()
     {
         return $this->progress()->where('status', 'Done')->count();
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        // Mengirim notifikasi verifikasi email ke antrean (Queue)
+        $notification = new VerifyEmail();
+        $notification->afterCommit(); // Hanya kirim jika database sukses simpan data
+        
+        $this->notify($notification->delay(now()->addSeconds(2))); 
     }
 }
 
