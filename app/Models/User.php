@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -136,14 +139,14 @@ public function rank()
     public function sendEmailVerificationNotification()
     {
         
-        $notification = new class extends VerifyEmail implements \Illuminate\Contracts\Queue\ShouldQueue 
-        {
-            use \Illuminate\Bus\Queueable;
-        };
+            $notification = new VerifyEmail();
 
-        $notification->afterCommit();
+            if ($notification instanceof ShouldQueue === false) {
+            
+                $notification->afterCommit();
+            }
 
-        $this->notify($notification);
-    }
+            $this->notify($notification);
+            }
 }
 
