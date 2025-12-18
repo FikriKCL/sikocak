@@ -34,24 +34,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'lowercase', 'alpha-dash', 'unique:users,username'],
-            'email' => [
-                'required', 'string', 'lowercase', 'email', 'max:255',
-                function ($attribute, $value, $fail) {
-                    $user = DB::table('users')
-                        ->select('id', 'email_verified_at')
-                        ->where('email', $value)
-                        ->first();
-
-                    if ($user) {
-                        if ($user->email_verified_at) {
-                            $fail('Email sudah terdaftar dan diverifikasi.');
-                        } else {
-                            $fail('Email sudah terdaftar tapi belum diverifikasi.');
-                        }
-                    }
-                },
-            ],
-            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
     $user = User::create([
