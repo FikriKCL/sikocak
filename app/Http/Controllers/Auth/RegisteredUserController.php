@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'lowercase', 'alpha-dash', 'unique:users,username'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255','unique:email'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255','unique:users,email'],
             'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
         ]);
 
