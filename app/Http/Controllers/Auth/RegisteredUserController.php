@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -29,26 +30,30 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
 {
-    $request->validate([
+  
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'lowercase', 'alpha-dash', 'unique:users,username'],
             'email' => [
-                'required', 'string', 'lowercase', 'email', 'max:255', 
+                'required', 'string', 'lowercase', 'email', 'max:255',
                 function ($attribute, $value, $fail) {
-                    $user = User::where('email', $value)->select('id', 'email_verified_at')->first();
-                    
+                    $user = DB::table('users')
+                        ->select('id', 'email_verified_at')
+                        ->where('email', $value)
+                        ->first();
+
                     if ($user) {
-                        if ($user->hasVerifiedEmail()) {
-                            $fail('Email sudah terdaftar dan diverifikasi. Silakan login.');
+                        if ($user->email_verified_at) {
+                            $fail('Email sudah terdaftar dan diverifikasi.');
                         } else {
-                            $fail('Email sudah terdaftar tetapi belum diverifikasi. Silakan cek inbox Anda atau kirim ulang link verifikasi.');
+                            $fail('Email sudah terdaftar tapi belum diverifikasi.');
                         }
                     }
                 },
             ],
-            'username' => ['required', 'string', 'lowercase', 'alpha-dash', 'unique:users,username'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
         ]);
-        
+
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
