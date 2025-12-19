@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -6,111 +7,97 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>Level {{ $exerciseIndex + 1 }} - Coding Maze</title>
 @vite(['resources/css/app.css','resources/js/app.js'])
+
 <style>
-#toast {
-    position: fixed; top: 1rem; right: 1rem;
-    min-width: 250px; padding: 1rem 1.5rem;
-    border-radius: 0.75rem; font-weight: bold;
-    color: white; display: none; z-index: 9999;
+/* =======================
+   TOAST
+======================= */
+#toast{
+    position:fixed; top:1rem; right:1rem;
+    min-width:250px; padding:1rem 1.5rem;
+    border-radius:.75rem; font-weight:bold;
+    color:white; display:none; z-index:9999;
 }
-#toast.success { background-color: #4BB543; }
-#toast.error { background-color: #FF3333; }
+#toast.success{background:#4BB543}
+#toast.error{background:#FF3333}
+
+/* =======================
+   BLOCK HIGHLIGHT ERROR
+======================= */
+.block-error{
+    background:#ffb3b3 !important;
+    border-color:#ff0000 !important;
+}
 </style>
+
 </head>
+
 <body class="bg-[#F5F5F0] min-h-screen">
 <div id="toast"></div>
 
 <div class="container mx-auto px-4 py-6">
-<header class="flex justify-between items-center mb-6 px-2 sm:px-0">
-
-    <!-- KEMBALI -->
-    <a href="{{ route('dashboard') }}"
-       class="bg-white px-3 sm:px-6 py-2 sm:py-3 rounded-full border-4 border-black
-              shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
-              hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-              transition-all text-center">
-        <span class="text-sm sm:text-xl font-black">← Kembali</span>
-    </a>
-
-    <!-- LEVEL -->
-    <div class="bg-[#CCFF00] px-3 sm:px-6 py-2 sm:py-3 rounded-full border-4 border-black
-                shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
-        <h1 class="text-sm sm:text-2xl font-black">Level {{ $exerciseIndex + 1 }}</h1>
-    </div>
-
-    <!-- XP -->
-    <div class="bg-[#FF9966] px-3 sm:px-6 py-2 sm:py-3 rounded-full border-4 border-black
-                shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
-        <span class="text-sm sm:text-xl font-black">{{ $user->xp }} XP</span>
-    </div>
-
+<header class="flex justify-between items-center mb-6">
+    <a href="{{ route('dashboard') }}" class="bg-white px-6 py-3 rounded-full border-4 border-black font-black">← Kembali</a>
+    <div class="bg-[#CCFF00] px-6 py-3 rounded-full border-4 border-black font-black">Level {{ $exerciseIndex + 1 }}</div>
+    <div class="bg-[#FF9966] px-6 py-3 rounded-full border-4 border-black font-black">{{ $user->xp }} XP</div>
 </header>
 
 <form id="mazeForm" method="POST" action="{{ route('exercise.submit',$exercise->id) }}">
-    @csrf
-    <input type="hidden" name="code_blocks" id="code_blocks">
-    <input type="hidden" name="is_finished" id="is_finished">
+@csrf
+<input type="hidden" name="code_blocks" id="code_blocks">
+<input type="hidden" name="is_finished" id="is_finished">
 
-    <div class="grid md:grid-cols-2 gap-6">
+<div class="grid md:grid-cols-2 gap-6">
 
-        <!-- MAP -->
-        <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
-            <h2 class="text-xl font-black text-center mb-4">{{ $exercise->question_text }}</h2>
-            <div id="map" class="relative mx-auto w-[320px] h-[192px] border-4 border-black rounded-xl overflow-hidden">
-                <img src="{{ asset('images/map2dd.png') }}" class="absolute inset-0 w-full h-full object-cover" alt="Map">
-                <img id="icak" src="{{ asset('images/monster.png') }}" class="absolute w-10 h-10 transition-transform duration-500">
-            </div>
-            <p class="text-center font-bold mt-4">Susun kode agar Icak sampai tujuan</p>
-            <p class="text-center font-bold mt-4">Cara Main : Drag & Drop</p>
-        </div>
+<!-- MAP -->
 
-        <!-- BLOCK CODING -->
-        <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
-            <h3 class="text-xl font-black mb-4">Blok Kode</h3>
-            <div id="toolbox" class="space-y-2 mb-4">
-                @foreach($exercise->options as $cmd)
-                <div draggable="true" data-cmd="{{ $cmd['code'] }}" 
-                     class="block bg-yellow-200 px-4 py-2 rounded-xl border-2 border-black cursor-grab">{{ $cmd['label'] }}</div>
-                @endforeach
-            </div>
-
-            <h4 class="font-black mb-2">Program Kamu</h4>
-            <div id="program" class="min-h-[120px] border-2 border-dashed border-black p-3 rounded-xl bg-gray-50"></div>
-
-            <button type="submit" class="mt-6 w-full bg-[#CCFF00] px-6 py-4 rounded-full font-black border-4 border-black">Jalankan & Kirim</button>
-        </div>
+<div class="bg-white p-6 rounded-3xl border-4 border-black">
+    <h2 class="text-xl font-black text-center mb-4">{{ $exercise->question_text }}</h2>
+    <div id="map" class="relative mx-auto w-[320px] h-[192px] border-4 border-black rounded-xl overflow-hidden">
+        <img src="{{ asset('images/map2dd.webp') }}" class="absolute inset-0 w-full h-full">
+        <img id="icak" src="{{ asset('images/monster-4.webp') }}" class="absolute w-10 h-10 transition-transform duration-500 my-3">
     </div>
+    <p class="text-center font-bold mt-4">Drag & Drop atau Klik Blok</p>
+</div>
+
+<!-- BLOCK CODING -->
+
+<div class="bg-white p-6 rounded-3xl border-4 border-black">
+    <h3 class="text-xl font-black mb-4">Blok Kode</h3>
+
+<div id="toolbox" class="space-y-2 mb-4">
+    @foreach($exercise->options as $cmd)
+    <div draggable="true" data-cmd="{{ $cmd['code'] }}"
+         class="cmd-block bg-yellow-200 px-4 py-2 rounded-xl border-2 border-black cursor-pointer">
+         {{ $cmd['label'] }}
+    </div>
+    @endforeach
+</div>
+
+<h4 class="font-black mb-2">Program Kamu</h4>
+<div id="program" class="min-h-[120px] border-2 border-dashed border-black p-3 rounded-xl bg-gray-50"></div>
+
+<button type="submit" class="mt-6 w-full bg-[#CCFF00] px-6 py-4 rounded-full font-black border-4 border-black">
+    Jalankan & Kirim
+</button>
+
+</div>
+</div>
 </form>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', ()=>{
-
 /* =======================
-   TOAST
+   INIT
 ======================= */
+document.addEventListener('DOMContentLoaded',()=>{
+
 const toast = document.getElementById('toast');
-function showToast(msg, type='success', duration=2500){
-    toast.textContent = msg;
-    toast.className = type;
-    toast.style.display = 'block';
-    setTimeout(()=>toast.style.display='none', duration);
-}
-
-/* =======================
-   ELEMENTS & STATE
-======================= */
+const program = document.getElementById('program');
+const icak = document.getElementById('icak');
 const form = document.getElementById('mazeForm');
 const hidden = document.getElementById('code_blocks');
 const finishedInput = document.getElementById('is_finished');
-const program = document.getElementById('program');
-const icak = document.getElementById('icak');
-
-let player = { x:0, y:0, dir:'right' };
-let hasFinished = false;
-let executionStopped = false;
-let currentStepIndex = 0;
-let errorIndex = null;
 
 const TILE = 64;
 const MAP = [
@@ -119,169 +106,144 @@ const MAP = [
   [1,0,0,0,1],
 ];
 
+let player = {x:0,y:0,dir:'right'};
+let hasFinished=false, stopped=false, errorIndex=null, step=0;
+
 /* =======================
-   HELPERS
+   TOAST
 ======================= */
-function render(){
-    icak.style.transform = `translate(${player.x * TILE}px, ${player.y * TILE}px)`;
+function showToast(msg,type='success',t=2500){
+    toast.textContent=msg; toast.className=type; toast.style.display='block';
+    setTimeout(()=>toast.style.display='none',t);
 }
+
+/* =======================
+   RENDER + ROTATION
+======================= */
+
+function getRotation(dir){
+    switch(dir){
+        case 'up': return -90;
+        case 'right': return 0;
+        case 'down': return 90;
+        case 'left': return 180;
+        default: return 0;
+    }
+}
+
+function render(){
+    icak.style.transform = `
+        translate(${player.x * TILE}px, ${player.y * TILE}px)
+        rotate(${getRotation(player.dir)}deg)
+    `;
+}
+
 
 function nextPos(){
-    let nx = player.x, ny = player.y;
-    if(player.dir === 'right') nx++;
-    if(player.dir === 'left') nx--;
-    if(player.dir === 'up') ny--;
-    if(player.dir === 'down') ny++;
-    return { nx, ny };
-}
-
-function clearBlockErrors(){
-    [...program.children].forEach(el => el.classList.remove('block-error'));
+    let {x,y,dir}=player;
+    if(dir==='right') x++;
+    if(dir==='left') x--;
+    if(dir==='up') y--;
+    if(dir==='down') y++;
+    return {x,y};
 }
 
 /* =======================
-   MOVEMENT LOGIC
+   MOVE LOGIC
 ======================= */
 function moveForward(){
-    if(executionStopped) return false;
-
-    const { nx, ny } = nextPos();
-
-    if(ny < 0 || ny >= MAP.length || nx < 0 || nx >= MAP[0].length){
-        showToast('🚫 Keluar map', 'error');
-        executionStopped = true;
-        errorIndex = currentStepIndex;
-        return false;
+    const {x,y}=nextPos();
+    if(y<0||y>=MAP.length||x<0||x>=MAP[0].length){
+        topped=true; errorIndex=step; showToast('🚫 Keluar map','error'); return;
     }
-
-    if(MAP[ny][nx] === 1){
-        showToast('🧱 Ada rintangan', 'error');
-        executionStopped = true;
-        errorIndex = currentStepIndex;
-        return false;
+    if(MAP[y][x]===1){
+        stopped=true; errorIndex=step; showToast('🧱 Tabrak rintangan','error'); return;
     }
-
-    player.x = nx;
-    player.y = ny;
-    render();
-
-    if(MAP[ny][nx] === 2){
-        hasFinished = true;
-    }
-
-    return true;
+    player.x=x; player.y=y; render();
+    if(MAP[y][x]===2) hasFinished=true;
 }
 
 function turnLeft(){
     const d = ['up','left','down','right'];
     player.dir = d[(d.indexOf(player.dir)+1) % 4];
+    render();
 }
 
 function turnRight(){
     const d = ['up','right','down','left'];
     player.dir = d[(d.indexOf(player.dir)+1) % 4];
+    render();
 }
 
+
 /* =======================
-   DRAG & DROP
+   DRAG & CLICK ADD
 ======================= */
-document.getElementById('toolbox').addEventListener('dragstart', e=>{
-    if(e.target.dataset.cmd){
-        e.dataTransfer.setData('text/plain', e.target.dataset.cmd);
-    }
+document.querySelectorAll('.cmd-block').forEach(b=>{
+    b.addEventListener('click',()=>addBlock(b.dataset.cmd));
+    b.addEventListener('dragstart',e=>e.dataTransfer.setData('cmd',b.dataset.cmd));
 });
 
-program.addEventListener('dragover', e=>e.preventDefault());
+program.addEventListener('dragover',e=>e.preventDefault());
+program.addEventListener('drop',e=>{
+    e.preventDefault(); addBlock(e.dataTransfer.getData('cmd'));
+});
 
-program.addEventListener('drop', e=>{
-    e.preventDefault();
-    const cmd = e.dataTransfer.getData('text/plain');
+function addBlock(cmd){
     if(!cmd) return;
-
-    const el = document.createElement('div');
-    el.dataset.cmd = cmd;
-    el.className = 'mb-2 bg-white px-3 py-2 rounded border-2 border-black flex justify-between';
-    el.innerHTML = `<span>${cmd}</span>
-        <button type="button" onclick="this.parentElement.remove()">×</button>`;
+    const el=document.createElement('div');
+    el.dataset.cmd=cmd;
+    el.className='mb-2 bg-white px-3 py-2 rounded border-2 border-black flex justify-between';
+    el.innerHTML=`<span>${cmd}</span><button type="button" onclick="this.parentElement.remove()">×</button>`;
     program.appendChild(el);
-});
+}
+
+function resetPlayer(){
+    player = { x:0, y:0, dir:'right' };
+    render();
+}
+
 
 /* =======================
    RUN PROGRAM
 ======================= */
 async function runProgram(cmds){
-    player = { x:0, y:0, dir:'right' };
-    hasFinished = false;
-    executionStopped = false;
-    currentStepIndex = 0;
-    errorIndex = null;
+ player={x:0,y:0,dir:'right'}; step=0; stopped=false; hasFinished=false; errorIndex=null;
+ [...program.children].forEach(b=>b.classList.remove('block-error'));
+ render();
 
-    clearBlockErrors();
-    render();
+ for(const c of cmds){
+    if(stopped) break;
+    if(c==='move_forward()') moveForward();
+    if(c==='turn_left()') turnLeft();
+    if(c==='turn_right()') turnRight();
+    await new Promise(r=>setTimeout(r,300));
+    step++;
+ }
+ if(errorIndex!==null){
+    const b=program.children[errorIndex];
+    if(b){b.classList.add('block-error'); b.scrollIntoView({behavior:'smooth',block:'center'});}
+ }
 
-    for(const c of cmds){
-        if(executionStopped) break;
+ if(!hasFinished){
+    setTimeout(() => {
+        resetPlayer();
+    }, 500);
+ }
 
-        if(c === 'move_forward()') moveForward();
-        if(c === 'turn_left()') turnLeft();
-        if(c === 'turn_right()') turnRight();
-
-        currentStepIndex++;
-        await new Promise(r => setTimeout(r, 300));
-    }
-
-    if(errorIndex !== null){
-        const block = program.children[errorIndex];
-        if(block){
-            block.classList.add('block-error');
-            block.scrollIntoView({ behavior:'smooth', block:'center' });
-        }
-    }
 }
 
 /* =======================
    SUBMIT
 ======================= */
-form.addEventListener('submit', async e=>{
+form.addEventListener('submit',async e=>{
     e.preventDefault();
-
-    const seq = [...program.children].map(b => b.dataset.cmd);
-    hidden.value = JSON.stringify(seq);
-
+    const seq=[...program.children].map(b=>b.dataset.cmd);
+    hidden.value=JSON.stringify(seq);
     await runProgram(seq);
-
-    if(!hasFinished){
-        showToast('⚠️ Icak belum sampai tujuan!', 'error');
-        return;
-    }
-
-    finishedInput.value = 1;
-
-    const formData = new FormData(form);
-    try{
-        const res = await fetch(form.action,{
-            method:'POST',
-            body: formData,
-            headers:{
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'Accept':'application/json'
-            }
-        });
-
-        const data = await res.json();
-
-        if(data.success){
-            showToast(data.popup_message || 'Level selesai!', 'success');
-            setTimeout(()=>{
-                if(data.next_url) window.location.href = data.next_url;
-            }, 1000);
-        }else{
-            showToast(data.error_message || 'Jawaban belum sempurna!', 'error', 4000);
-        }
-    }catch(err){
-        console.error(err);
-        setTimeout(()=>form.submit(), 500);
-    }
+    if(!hasFinished) return showToast('⚠️ Icak belum sampai tujuan','error');
+    finishedInput.value=1;
+    form.submit();
 });
 
 });

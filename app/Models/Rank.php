@@ -43,12 +43,12 @@ class Rank extends Model
         public function badge()
     {
         return match($this->id) {
-            1 => '/images/bronze.png',
-            2 => '/images/silver.png',
-            3 => '/images/gold.png',
-            4 => '/images/diamond.png',
-            5 => '/images/kuarsa.png',
-            default => '/images/default.png',
+            1 => '/images/bronze.webp',
+            2 => '/images/silver.webp',
+            3 => '/images/gold.webp',
+            4 => '/images/diamond.webp',
+            5 => '/images/kuarsa.webp',
+            default => '/images/default.webp',
         };
     }
 }

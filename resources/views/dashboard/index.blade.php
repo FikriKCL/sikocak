@@ -136,7 +136,7 @@
                     <!-- Mascot -->
                     <div class="relative animate-bounce">
                         <div class="w-20 h-24 ml-5">
-                            <img src="/images/monster.png" alt="">
+                            <img src="/images/monster.webp" alt="">
                         </div>
                     </div>
 
@@ -191,4 +191,16 @@
         </div>
     </div>
 </body>
+<script src="text/javascript">
+        // Source - https://stackoverflow.com/a
+    // Posted by JonBrave, modified by community. See post 'Timeline' for change history
+    // Retrieved 2025-12-19, License - CC BY-SA 4.0
+
+    history.pushState(null, document.title, location.href);
+    window.addEventListener('popstate', function (event)
+    {
+    history.pushState(null, document.title, location.href);
+    });
+
+</script>
 </html>
