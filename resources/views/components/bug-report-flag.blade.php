@@ -3,7 +3,7 @@
 
     <!-- Icon -->
    <img
-    src="images/flag-bug-report.svg"
+    src="images/flag-bug-report.webp"
     {{ $attributes->merge(['class' => 'w-6 h-6']) }}
     alt="Bug Report"
 />

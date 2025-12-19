@@ -99,7 +99,7 @@
                                     bg-black border-black border-2 rounded-full
                                     text-xs font-semibold uppercase tracking-wider
                                     text-white transition duration-150 hover:bg-green-100 cursor-pointer">
-                            <img class="h-4" src="svg/apple-logo.svg" alt="apple">
+                            <img class="h-4" src="svg/apple-logo.webp" alt="apple">
                         </div>
 
                   
@@ -107,7 +107,7 @@
                                     bg-white border-black border-2 rounded-full
                                     text-xs font-semibold uppercase tracking-wider
                                     text-black transition duration-150 hover:bg-green-100 cursor-pointer">
-                            <img class="h-4" src="svg/google-logo.svg" alt="google">
+                            <img class="h-4" src="svg/google-logo.webp" alt="google">
                         </div>
                     </div>
 
