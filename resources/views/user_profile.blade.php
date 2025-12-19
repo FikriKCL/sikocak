@@ -1,6 +1,6 @@
 @props(['users'])
 <x-app-layout>
-    <div class="h-screen overflow-hidden">
+    <div class="h-screen">
         @if ($users->id_rank == 5)
             <x-profile.kuarsa-profile :user="$users" />
         @elseif ($users->id_rank == 4)

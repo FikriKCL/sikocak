@@ -50,7 +50,7 @@
                     name="password_confirmation" 
                     required
                     autocomplete="new-password"
-                    placeholder="Konfirmasi Password"
+                    placeholder="Konfirmasi"
                     class="block mt-1 w-full rounded-full border-black placeholder:text-gray-600 text-sm py-1.5"
                 />
                 <button type="button" @click="show = !show" class="absolute inset-y-0 right-3 flex items-center">
