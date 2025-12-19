@@ -136,7 +136,7 @@
                     <!-- Mascot -->
                     <div class="relative animate-bounce">
                         <div class="w-20 h-24 ml-5">
-                            <img src="/images/monster.png" alt="">
+                            <img src="/images/monster.webp" alt="">
                         </div>
                     </div>
 

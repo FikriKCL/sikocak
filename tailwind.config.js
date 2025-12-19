@@ -28,7 +28,7 @@ export default {
       },
 
       backgroundImage: {
-        'auth-bg': "url('/images/background.png')",
+        'auth-bg': "url('/images/background.webp')",
       },
     },
   },

@@ -50,23 +50,23 @@ class UserSeeder extends Seeder
             [
     
                 'name' => 'Bronze',
-                'imageUri' => 'bronze.png',
+                'imageUri' => 'bronze.webp',
             ],
             [
                 'name' => 'Silver',
-                'imageUri' => 'silver.png',
+                'imageUri' => 'silver.webp',
             ],
             [
                 'name' => 'Gold',
-                'imageUri' => 'gold.png',
+                'imageUri' => 'gold.webp',
             ],
             [
                 'name' => 'Diamond',
-                'imageUri' => 'diamond.png',
+                'imageUri' => 'diamond.webp',
             ],
             [
                 'name' => 'Quartz',
-                'imageUri' => 'kuarsa.png',
+                'imageUri' => 'kuarsa.webp',
             ]
         ];
 

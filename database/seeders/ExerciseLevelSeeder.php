@@ -26,7 +26,7 @@ class ExerciseLevelSeeder extends Seeder
             'type' => 'Multiple Choice',
             'level_type' => 'pattern',
             'difficulty' => 1,
-            'question_image' => '/images/monster.png',
+            'question_image' => '/images/monster.webp',
             'options' => json_encode([
                 ['id' => 1, 'colors' => ['green', 'white', 'green'], 'label' => 'Pilihan 1'],
                 ['id' => 2, 'colors' => ['green', 'green', 'white'], 'label' => 'Pilihan 2'],
@@ -79,7 +79,7 @@ class ExerciseLevelSeeder extends Seeder
             'type' => 'Multiple Choice',
             'level_type' => 'conditional',
             'difficulty' => 3,
-            'question_image' => '/images/traffic-light.png',
+            'question_image' => '/images/traffic-light.webp',
             'options' => json_encode([
                 ['id' => 1, 'text' => 'BERHENTI', 'action' => 'stop'],
                 ['id' => 2, 'text' => 'JALAN', 'action' => 'go'],

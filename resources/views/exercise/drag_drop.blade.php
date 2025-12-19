@@ -57,8 +57,8 @@
         <div class="bg-white p-6 rounded-3xl border-4 border-black shadow-[8px_8px_0]">
             <h2 class="text-xl font-black text-center mb-4">{{ $exercise->question_text }}</h2>
             <div id="map" class="relative mx-auto w-[320px] h-[192px] border-4 border-black rounded-xl overflow-hidden">
-                <img src="{{ asset('images/map2dd.png') }}" class="absolute inset-0 w-full h-full object-cover" alt="Map">
-                <img id="icak" src="{{ asset('images/monster.png') }}" class="absolute w-10 h-10 transition-transform duration-500">
+                <img src="{{ asset('images/map2dd.webp') }}" class="absolute inset-0 w-full h-full object-cover" alt="Map">
+                <img id="icak" src="{{ asset('images/monster.webp') }}" class="absolute w-10 h-10 transition-transform duration-500">
             </div>
             <p class="text-center font-bold mt-4">Susun kode agar Icak sampai tujuan</p>
             <p class="text-center font-bold mt-4">Cara Main : Drag & Drop</p>

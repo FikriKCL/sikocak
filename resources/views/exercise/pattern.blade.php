@@ -67,7 +67,7 @@
                     <div class="flex justify-center gap-2 sm:gap-4 flex-wrap">
                         @foreach($pattern as $color)
                             <div class="flex flex-col items-center">
-                                <img src="{{ asset('images/monster.png') }}"
+                                <img src="{{ asset('images/monster.webp') }}"
                                      alt="Monster"
                                      class="w-12 h-12 sm:w-20 sm:h-20"
                                      style="filter: {{ $color === 'green'
@@ -116,7 +116,7 @@
                                     <div class="flex gap-2 sm:gap-3
                                                 sm:ml-auto justify-center sm:justify-end">
                                         @foreach($option['colors'] as $color)
-                                            <img src="{{ asset('images/monster.png') }}"
+                                            <img src="{{ asset('images/monster.webp') }}"
                                                  class="w-12 h-12 sm:w-16 sm:h-16"
                                                  style="filter: {{ $color === 'green'
                                                     ? 'hue-rotate(90deg) saturate(2)'

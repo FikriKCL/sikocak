@@ -14,7 +14,7 @@
                 flex items-center justify-center
                 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
         <img 
-            src="{{ asset('images/trophy.png') }}" 
+            src="{{ asset('images/trophy.webp') }}" 
             alt="Trophy"
             class="w-7 h-7 object-contain"
         >
