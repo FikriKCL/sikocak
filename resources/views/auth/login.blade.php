@@ -143,13 +143,9 @@
                
 
             </div>
-        </div>
-
-        
-        
-                    
+        </div>          
     </form>
-    </div>
+  
         @if (session('status'))
             <div class="mt-4 p-3 rounded-lg bg-green-600 text-white text-center animate-pulse">
                 {{ session('status') }}

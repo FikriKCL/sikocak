@@ -1,9 +1,9 @@
-<x-register-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.email') }}">
+<x-register-layout>
+    <div class="flex flex-col items-center">
+    <form method="POST" action="{{ route('password.change') }}">
         @csrf
+        @method('put')
 
         <!-- Email Address -->
         <div class="mb-4 text-black">
@@ -13,12 +13,25 @@
                 class="block mt-1 w-full" 
                 type="email" 
                 name="email" 
-                :value="old('email')" 
                 required 
                 autofocus 
                 placeholder="Masukkan email"
             />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <div class="mb-4 text-black">
+            <x-input-label for="password" :value="__('Password Baru')" class="text-black"/>
+            <x-text-input 
+                id="password" 
+                class="block mt-1 w-full" 
+                type="password" 
+                name="password"  
+                required 
+                autofocus 
+                placeholder="Masukan Password Baru!"
+            />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Button dan Text Instruksi -->
@@ -34,4 +47,8 @@
             </div>
         </div>
     </form>
+</div>
 </x-register-layout>
+
+   
+
