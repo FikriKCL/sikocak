@@ -142,10 +142,26 @@
 @endif
 
 @if(session('error'))
-<div class="fixed bottom-6 right-4 sm:right-8 bg-[#FF9966] px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border-4 border-black shadow-[8px_8px_0] z-50">
-    <p class="text-lg sm:text-xl font-black text-black">{{ session('error') }}</p>
+<div id="toast-error" class="fixed bottom-6 right-4 md:right-8
+            bg-[#FF9966] px-6 md:px-8 py-4
+            rounded-2xl border-4 border-black
+            shadow-[8px_8px_0] z-50">
+    <p class="text-lg md:text-xl font-black text-black">
+        {{ session('error') }}
+    </p>
 </div>
 @endif
+
+<script>
+       setTimeout(() => {
+        const toast = document.getElementById('toast-error');
+        if(toast){
+            toast.style.transition = 'opacity 0.5s ease';
+            toast.style.opacity = 0;
+            setTimeout(() => toast.remove(), 500); 
+        }
+    }, 1000);
+</script>
 
 </body>
 </html>

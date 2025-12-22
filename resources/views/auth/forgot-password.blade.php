@@ -1,10 +1,9 @@
-<x-register-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
+<x-register-layout>
+    <div class="flex flex-col items-center">
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
-
+        
         <!-- Email Address -->
         <div class="mb-4 text-black">
             <x-input-label for="email" :value="__('Email')" class="text-black"/>
@@ -13,7 +12,6 @@
                 class="block mt-1 w-full" 
                 type="email" 
                 name="email" 
-                :value="old('email')" 
                 required 
                 autofocus 
                 placeholder="Masukkan email"
@@ -34,4 +32,7 @@
             </div>
         </div>
     </form>
+</div>
 </x-register-layout>
+
+   

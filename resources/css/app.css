@@ -1,4 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap'); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,21 +9,11 @@
 
 @font-face {
     font-family: 'Jost';
-    src: url('/fonts/Jost-VariableFont_wght.ttf') format('truetype');
+    src: url('../fonts/Jost-VariableFont_wght.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
-
-/* Optional italic */
-@font-face {
-    font-family: 'Jost';
-    src: url('/fonts/Jost-Italic-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
-}
-
 
 
 

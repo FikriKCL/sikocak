@@ -14,7 +14,7 @@ export default {
         extend: {
         fontFamily: {
             jost: ["Jost", "sans-serif"], 
-             sans: ['Jost', 'ui-sans-serif','system-ui'],
+            sans: ['Jost', 'ui-sans-serif','system-ui'],
         },
 
       boxShadow: {
@@ -28,7 +28,7 @@ export default {
       },
 
       backgroundImage: {
-        'auth-bg': "url('/images/background.png')",
+        'auth-bg': "url('/images/background.webp')",
       },
     },
   },
