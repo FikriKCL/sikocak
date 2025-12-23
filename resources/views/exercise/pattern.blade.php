@@ -71,11 +71,11 @@
                                      alt="Monster"
                                      class="w-12 h-12 sm:w-20 sm:h-20"
                                      style="filter: {{ $color === 'green'
-                                        ? 'hue-rotate(90deg) saturate(0)'
+                                        ? 'hue-rotate(90deg) saturate(2)'
                                         : 'brightness(1.5) saturate(0)' }}">
 
                                 <span class="text-xs sm:text-sm font-bold mt-1">
-                                    {{ $color === 'green' ? 'Hijau' : 'Putih' }}
+                                    {{ $color === 'green' ? 'Biru' : 'Putih' }}
                                 </span>
                             </div>
                         @endforeach
