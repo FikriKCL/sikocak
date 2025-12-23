@@ -71,7 +71,7 @@
                                      alt="Monster"
                                      class="w-12 h-12 sm:w-20 sm:h-20"
                                      style="filter: {{ $color === 'green'
-                                        ? 'hue-rotate(90deg) saturate(2)'
+                                        ? 'hue-rotate(90deg) saturate(0)'
                                         : 'brightness(1.5) saturate(0)' }}">
 
                                 <span class="text-xs sm:text-sm font-bold mt-1">
